@@ -1,1 +1,1 @@
-web: gunicorn backsite.wsgi --log-file -
+web: gunicorn diagapp.wsgi --log-file -
