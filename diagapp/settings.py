@@ -24,9 +24,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'f57amh6e@utb+k-nm&8*gl0w(ny^%%7w1sst19%-y)c^zve&f3'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['murmuring-inlet-55023.herokuapp.com']
+ALLOWED_HOSTS = ['https://murmuring-inlet-55023.herokuapp.com']
 
 
 # Application definition
