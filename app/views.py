@@ -3,9 +3,9 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.template import RequestContext
 from django.views.decorators.csrf import ensure_csrf_cookie
-from .models import GenericData
+from .models import GenericData, Data
 from rest_framework import viewsets
-from .serializers import GenericDataSerializer, UserSerializer, GroupSerializer
+from .serializers import GenericDataSerializer, UserSerializer, GroupSerializer, DataSerializer
 from django.contrib.auth.models import User, Group
 import requests
 from django.contrib.auth.decorators import login_required
@@ -43,6 +43,10 @@ def postdata(request):
 		form = GenericDataForm()
 	return render(request, 'index.html', {'form': form})
 	
+class DataViewSet(viewsets.ModelViewSet):
+
+	queryset = Data.objects.all()
+	serializer_class= DataSerializer
 
 class GenericDataViewSet(viewsets.ModelViewSet):
 

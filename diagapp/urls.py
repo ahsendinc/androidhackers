@@ -22,6 +22,7 @@ router = routers.DefaultRouter()
 router.register(r'genericdata',views.GenericDataViewSet)
 router.register(r'users', views.UserViewSet)
 router.register(r'groups', views.GroupViewSet)
+router.register(r'data',views.DataViewSet)
 
 urlpatterns = [
 	url(r'^', include(router.urls)),
