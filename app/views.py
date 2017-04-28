@@ -37,17 +37,23 @@ def index(request):
 		lasttemperature = BatteryTemperature.objects.all()[BatteryTemperature.objects.count()-1].value
 		lastcpu = CPUTotal.objects.all()[CPUTotal.objects.count()-1].value
 		lastram = MemInfoFreeRam.objects.all()[MemInfoFreeRam.objects.count()-1].value
+
+		allbatterylevel = BatteryLevel.objects.all()
+
+		#for battery_level in allbatterylevel:
+
 	# #return render(request, 'index.html', data)''
 
 	# 		return (HttpResponse("last field:" + last['field']))
 	# 		#return HttpResponse(json.dumps(last))
 	# 	except:
 	# 		return HttpResponse("Hello! You're at the Android Diagnosis index. No data to show yet or Exception happened.")
-		return render(request, 'battery.html', {'lasthealth':lasthealth, 'laststatus':laststatus, 'lastlevel':lastlevel,'lasttemperature':lasttemperature,'lastcpu':lastcpu, 'lastram':lastram})
+		return render(request, 'battery.html', {'lasthealth':lasthealth, 'laststatus':laststatus, 'lastlevel':lastlevel,'lasttemperature':lasttemperature,'lastcpu':lastcpu, 'lastram':lastram, 'allbatterylevel':allbatterylevel})
 	else:	
 	    return HttpResponse("Hello! You're at the Android Diagnosis index. Not allowed action.")
 	   # context = {'foo': 'bar'}
 	    #return render(request, 'index.html', context)
+
 
 def indexcpu(request):
 	if (request.method == "GET"):
@@ -150,12 +156,12 @@ def postdata(request):
 			serialized = CPUTotalSerializer(data=mylist, many=True)
 			if serialized.is_valid():
 				serialized.save()
-
-			listOfThings = request.data['cpu_kernel']
-			mylist = json.loads(listOfThings)
-			serialized = CPUKernelSerializer(data=mylist, many=True)
-			if serialized.is_valid():
-				serialized.save()
+#deletedcpukernel
+			# listOfThings = request.data['cpu_kernel']
+			# mylist = json.loads(listOfThings)
+			# serialized = CPUKernelSerializer(data=mylist, many=True)
+			# if serialized.is_valid():
+			# 	serialized.save()
 
 			listOfThings = request.data['cpu_user']
 			mylist = json.loads(listOfThings)
@@ -211,19 +217,19 @@ def postdata(request):
 			if serialized.is_valid():
 				serialized.save()
 
-			listOfThings = request.data['meminfo_totalram']
+			listOfThings = request.data['ram_total']
 			mylist = json.loads(listOfThings)
 			serialized = MemInfoTotalRamSerializer(data=mylist, many=True)
 			if serialized.is_valid():
 				serialized.save()
 
-			listOfThings = request.data['meminfo_freeram']
+			listOfThings = request.data['ram_free']
 			mylist = json.loads(listOfThings)
 			serialized = MemInfoFreeRamSerializer(data=mylist, many=True)
 			if serialized.is_valid():
 				serialized.save()
 
-			listOfThings = request.data['meminfo_usedram']
+			listOfThings = request.data['ram_used']
 			mylist = json.loads(listOfThings)
 			serialized = MemInfoUsedRamSerializer(data=mylist, many=True)
 			if serialized.is_valid():

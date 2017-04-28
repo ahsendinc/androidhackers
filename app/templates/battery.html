@@ -443,22 +443,20 @@
 
      <script type="text/javascript">
   $(function () {
+    var dict = []; // create an empty array
+for (i = 0; i < {{allbatterylevel}}.length; i++) {
+dict.push({
+    key:   "time",
+    value: "value"
+});
     var timestamp_data = [
-  {"period": 1349046000000, "value": 100},
-  {"period": 1313103600000, "value": 43},
-  {"period": 1299110400000, "value": 23},
-  {"period": 1281222000000, "value": 65},
-  {"period": 1273446000000, "value": 76},
-  {"period": 1268524800000, "value": 56},
-  {"period": 1263081600000, "value": 45},
-  {"period": 1260403200000, "value": 23},
-  {"period": 1254870000000, "value": 76},
-  {"period": 1253833200000, "value": 88}
+    {% for batterylevel in allbatterylevel %}
+    {"value":}
 ];
 Morris.Line({
   element: 'battery_level',
   data: timestamp_data,
-  xkey: 'period',
+  xkey: 'time',
   ykeys: ['value'],
   yLabelFormat: function(value) {
                   return value + '%'; 
@@ -477,9 +475,9 @@ Morris.Line({
 <script type="text/javascript">
   $(function () {
     var timestamp_data = [
-  {"period": 1349046000000, "value": 25},
-  {"period": 1313103600000, "value": 35},
-  {"period": 1299110400000, "value": 37},
+  {"time": 1349046000000, "value": 25},
+  {"time": 1313103600000, "value": 35},
+  {"time": 1299110400000, "value": 37},
   {"period": 1281222000000, "value": 42},
   {"period": 1273446000000, "value": 10},
   {"period": 1268524800000, "value": 22},
