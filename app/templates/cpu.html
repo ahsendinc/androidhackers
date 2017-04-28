@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Android Hackers</title>
+
+    {% load staticfiles %}
+    <!-- Bootstrap -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="{% static 'css/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="{% static 'css/nprogress.css' %}" rel="stylesheet">
+    
+  
+    <!-- bootstrap-progressbar -->
+    <link href="{% static 'css/bootstrap-progressbar-3.3.4.min.css' %}" rel="stylesheet">
+    
+    <!-- bootstrap-daterangepicker -->
+    <link href="{% static 'css/daterangepicker.css' %}" rel="stylesheet">
+
+    <!-- Custom Theme Style -->
+    <link href="{% static 'css/custom.min.css' %}" rel="stylesheet">
+
+    <!--  AHSEN WAS HERE AND ADDED WHAT IS NEEDED FOR MORRIS CHART -->
+     
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.2/raphael-min.js"></script>
+  <script src="{% static 'js/morris.js' %}"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/prettify/r224/prettify.min.js"></script>
+  
+  <!-- <link rel="stylesheet" href="../vendors/morris.js/examples/lib/example.css"> -->
+  <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/prettify/r224/prettify.min.css">
+  <link rel="stylesheet" href="{% static 'css/morris.css' %}">
+    
+    <!-- ============ CPU Total Chart ============= -->
+<script type="text/javascript">
+  $(function () {
+    var timestamp_data = [
+  {"period": 1349046000000, "value": 25},
+  {"period": 1313103600000, "value": 54},
+  {"period": 1299110400000, "value": 90},
+  {"period": 1281222000000, "value": 78},
+  {"period": 1273446000000, "value": 45},
+  {"period": 1268524800000, "value": 54},
+  {"period": 1263081600000, "value": 45},
+  {"period": 1260403200000, "value": 23},
+  {"period": 1254870000000, "value": 76},
+  {"period": 1253833200000, "value": 100}
+];
+Morris.Line({
+  element: 'cpu_total',
+  data: timestamp_data,
+  xkey: 'period',
+  ykeys: ['value'],
+  yLabelFormat: function(value) {
+                  return value + '%'; 
+                },
+  labels: ['battery value'],
+  dateFormat: function (x) { return new Date(x).toDateString(); }
+});
+});
+  </script>
+<!-- ============ CPU Total Chart ============= -->
+
+<!-- ============== CPU LOAD ================== -->
+<!-- ONLY NEED TO DISPLAY CURRENT DATA -->
+<script type="text/javascript">
+  $(function () {
+    var day_data = [
+  {"period": "Timestamp", "1 min avg": 4.81, "5 min avg": 5.40, "15 min avg": 4.98}
+  
+];
+Morris.Bar({
+  element: 'cpu_load',
+  data: day_data,
+  xkey: 'period',
+  ykeys: ['1 min avg', '5 min avg', '15 min avg'],
+  labels: ['1 min avg', '5 min avg', '15 min avg'],
+  hideHover: 'auto'
+});
+});
+  </script>
+
+
+<!-- ============== CPU LOAD ================== -->
+
+<!-- ============== RAM CHART ========== -->
+<script type="text/javascript">
+  $(function () {
+   
+Morris.Donut({
+  element: 'RAM',
+  data: [
+    {value: 48, label: 'Free RAM', formatted:"" },
+    {value: 52, label: 'Used Ram', formatted: "" },
+    
+  ],
+  formatter: function (x, data) { return data.value + "%"; }
+});
+});
+  </script>
+
+
+<!-- ============== RAM CHART ========== -->
+
+  </head>
+
+  <body class="nav-md">
+    <div class="container body">
+      <div class="main_container">
+        <div class="col-md-3 left_col">
+          <div class="left_col scroll-view">
+            <div class="navbar nav_title" style="border: 0;">
+              <a href=".." class="site_title"><i class="fa fa-android"></i> <span>Android Debug</span></a>
+            </div>
+
+            <div class="clearfix"></div>
+
+            
+
+            <br />
+
+           <!-- sidebar menu -->
+            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+              <div class="menu_section">
+                <h3>Menu</h3>
+                <ul class="nav side-menu">
+                  <li><a><i class="fa fa-home"></i> Statistics <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="..">Battery</a></li>
+                      <li><a href="../cpu">CPU and RAM</a></li>
+                      <li><a href="../test">Run Tests</a></li>
+                    </ul>
+                  </li>
+                  
+                  <li><a><i class="fa fa-desktop"></i> About <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="project_details.html">Project Details</a></li>
+                      <li><a href="report.html">Report</a></li>
+                      <li><a href="contacts.html">Our Team</a></li>
+                      
+                    </ul>
+                  </li>
+                  
+              </div>
+              
+
+            </div>
+            <!-- /sidebar menu -->
+
+            
+          </div>
+        </div>
+
+        <!-- top navigation -->
+          <!-- top navigation -->
+        <div class="top_nav">
+          <div class="nav_menu">
+            <nav>
+              <div class="nav toggle">
+                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+              </div>
+
+              
+
+
+
+            </nav>
+          </div>
+        </div>
+        <!-- /top navigation -->
+        <!-- /top navigation -->
+
+        <!-- page content -->
+        <div class="right_col" role="main">
+          <div class="">
+            <!-- top tiles -->
+            <!-- ============== TOP BAR WITH BATTERY HEALTH, STATUS, LEVEL, TEMP, ETC... -->
+          <div class="row tile_count">
+            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+              <span class="count_top"><i class="fa fa-heart"></i> Battery Health</span>
+              <div class="count">Good</div>
+              
+            </div>
+            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+              <span class="count_top"><i class="fa fa-cog"></i> Battery Status</span>
+              <div class="count">Full</div>
+              
+            </div>
+            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+              <span class="count_top"><i class="fa fa-bolt"></i> Battery Level</span>
+              <div class="count green">100%</div>
+            </div>
+            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+              <span class="count_top"><i class="fa fa-fire"></i> Battery Temperature</span>
+              <div class="count">35&#8451;</div>
+            </div>
+            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+              <span class="count_top"><i class="fa fa-user"></i> CPU Usage</span>
+              <div class="count">31%</div>
+            </div>
+            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+              <span class="count_top"><i class="fa fa-archive"></i> Total Free RAM</span>
+              <div class="count">1.26GB</div>
+            </div>
+          </div>
+          <!-- ============== TOP BAR WITH BATTERY HEALTH, STATUS, LEVEL, TEMP, ETC... -->
+          <!-- /top tiles -->
+
+            <div class="row">
+              <div class="col-md-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>CPU Total <small>Total CPU Used Over Time</small></h2>
+                    <div class="filter">
+                      <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
+                        <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+                        <span>December 30, 2014 - January 28, 2015</span> <b class="caret"></b>
+                      </div>
+                    </div>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <div class="col-md-9 col-sm-12 col-xs-12">
+                      <div class="demo-container" style="height:280px">
+                      <!-- ============ CPU Total Chart ============= -->
+                        <div id="cpu_total" class="demo-placeholder"></div>
+                        <!-- ============ CPU Total Chart ============= -->
+                      </div>
+                      
+
+                    </div>
+                    <!-- ============== CPU HOGS TABLE ========== -->
+                    <div class="col-md-3 col-sm-12 col-xs-12">
+                      <div>
+                        <div class="x_title">
+                          <h2>Top CPU Hogs</h2>
+                          
+                          <ul class="nav navbar-right panel_toolbox">
+                            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                            
+                            <li><a class="close-link"><i class="fa fa-close"></i></a>
+                            </li>
+                          </ul>
+                          <div class="clearfix"></div>
+                        </div>
+                        <ul class="list-unstyled top_profiles scroll-view">
+                          <li class="media event">
+                            
+                            <div class="media-body">
+                              <a class="title" href="#">system_server</a>
+                              <p><strong>24%</strong> </p>
+                              
+                            </div>
+                          </li>
+                          <li class="media event">
+                           
+                            <div class="media-body">
+                              <a class="title" href="#">surfaceflinger</a>
+                              <p><strong>18%</strong> </p>
+                              
+                            </div>
+                          </li>
+                          <li class="media event">
+                            
+                            <div class="media-body">
+                              <a class="title" href="#">kswapd0</a>
+                              <p><strong>10%</strong> </p>
+                            </div>
+                          </li>
+
+                           <li class="media event">
+                            
+                            <div class="media-body">
+                              <a class="title" href="#">mediaserver</a>
+                              <p><strong>9.7%</strong> </p>
+                              
+                            </div>
+                          </li>
+                          <li class="media event">
+                            
+                            <div class="media-body">
+                              <a class="title" href="#">com.google.android.youtube</a>
+                              <p><strong>6.1%</strong> </p>
+                              
+                            </div>
+                          </li>
+
+                          <li class="media event">
+                            
+                            <div class="media-body">
+                              <a class="title" href="#">com.sec.android.inputmethod</a>
+                              <p><strong>5.4%</strong> </p>
+                              
+                            </div>
+                          </li>
+                          
+                        </ul>
+                      </div>
+                    </div>
+                      <!-- ============== CPU HOGS TABLE ========== -->
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+           
+            <div class="row">
+
+              <div class="col-md-4">
+               <div class="x_panel">
+                  <div class="x_title">
+                    <h2>Average Processor Load</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                  <!-- ============== CPU LOAD ================== -->
+                    <div id="cpu_load" style="width:100%; height:200px;"></div>
+                    <!-- ============== CPU LOAD ================== -->
+                  </div>
+                </div>
+
+
+
+
+              </div>
+
+
+
+              <div class="col-md-4">
+                 <div class="x_panel">
+                <div class="x_title">
+                  <h2>RAM Usage</h2>
+                  <ul class="nav navbar-right panel_toolbox">
+                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                    
+                    <li><a class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
+                  </ul>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                  <!-- ============== RAM CHART ========== -->
+                      <div id="RAM" style="width:100%; height:200px;"></div>  
+                  <!-- ============== RAM CHART ========== -->
+                    
+                </div>
+              </div>
+
+              </div>
+
+
+
+              <!-- ============== RAM USED TABLE ========== -->
+              <div class="col-md-4">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>RAM Used</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th>RAM</th>
+                          <th>Amount (kB)</th>
+                          <th> Percent (%) </th>
+                          
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <th scope="row">Free RAM</th>
+                          <td>1269227</td>
+                          <td> 52% </th>
+                          
+                        </tr>
+                        <tr>
+                          <th scope="row">Used RAM</th>
+                          <td>1473393</td>
+                          <td> 48% </th>
+                          
+                        </tr>
+                        <tr>
+                          <th scope="row">Total RAM</th>
+                          <td>2742620</td>
+                          <td> - </th>
+                          
+                        </tr>
+                      </tbody>
+                    </table>
+
+                  </div>
+                </div>
+              </div>
+              <!-- ============== RAM USED TABLE ========== -->
+
+
+
+
+            </div>
+          </div>
+        </div>
+        <!-- /page content -->
+<!-- footer content -->
+        <footer>
+          <div class="pull-right">
+            Android Hackers Project from <a href="http://www.ece.utexas.edu/">UT Austin | ECE Department</a>
+          </div>
+          <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
+      </div>
+    </div>
+ <!-- jQuery -->
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <!-- Bootstrap -->
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <!-- FastClick -->
+    <script src="{% static 'js/fastclick.js' %}"></script>
+    <!-- NProgress -->
+    <script src="{% static 'js/nprogress.js' %}"></script>
+    
+  
+    <!-- DateJS -->
+    <script src="{% static 'js/build/date.js' %}"></script>
+    
+    <!-- bootstrap-daterangepicker -->
+    <script src="{% static 'js/moment.min.js' %}"></script>
+    <script src="{% static 'js/daterangepicker.js' %}"></script>
+
+    <!-- Custom Theme Scripts -->
+    <script src="{% static 'js/custom.min.js' %}"></script>
+
+    <!-- morris.js -->
+    <script src="{% static 'js/raphael.min.js' %}"></script>
+    <script src="{% static 'js/morris.min.js' %}"></script>
+    
+  </body>
+</html>

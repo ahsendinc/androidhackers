@@ -23,23 +23,67 @@ from rest_framework.mixins import CreateModelMixin
 from rest_framework.renderers import JSONRenderer
 
 from .serializers import CPUTotalSerializer, CPUUserSerializer, CPUKernelSerializer, CPULoad1Serializer, CPULoad2Serializer,CPULoad3Serializer, CPUHog1Serializer, CPUHog2Serializer, CPUHog3Serializer, CPUHog4Serializer, CPUHog5Serializer, MemInfoTotalRamSerializer, MemInfoFreeRamSerializer, MemInfoUsedRamSerializer
+from .models import TestInfo
 # Create your views here.
 #@ensure_csrf_cookie
 def index(request):
 	if (request.method == "GET"):
 		#data = request.GET.get('username')
-		try:
-			last = json.loads(GenericData.objects.all()[GenericData.objects.count()-1].jsondata)
-	#return render(request, 'index.html', data)''
+	# 	try:
+		lasthealth = BatteryHealth.objects.all()[BatteryHealth.objects.count()-1].value
+		laststatus = BatteryStatus.objects.all()[BatteryStatus.objects.count()-1].value
+		lastlevel = BatteryLevel.objects.all()[BatteryLevel.objects.count()-1].value
+		lasttemperature = BatteryTemperature.objects.all()[BatteryTemperature.objects.count()-1].value
+		lastcpu = CPUTotal.objects.all()[CPUTotal.objects.count()-1].value
+		lastram = MemInfoFreeRam.objects.all()[MemInfoFreeRam.objects.count()-1].value
+	# #return render(request, 'index.html', data)''
 
-			return (HttpResponse("last field:" + last['field']))
-			#return HttpResponse(json.dumps(last))
-		except:
-			return HttpResponse("Hello! You're at the Android Diagnosis index. No data to show yet or Exception happened.")
+	# 		return (HttpResponse("last field:" + last['field']))
+	# 		#return HttpResponse(json.dumps(last))
+	# 	except:
+	# 		return HttpResponse("Hello! You're at the Android Diagnosis index. No data to show yet or Exception happened.")
+		return render(request, 'battery.html', {'lasthealth':lasthealth, 'laststatus':laststatus, 'lastlevel':lastlevel,'lasttemperature':lasttemperature,'lastcpu':lastcpu, 'lastram':lastram})
 	else:	
-	    return HttpResponse("Hello! You're at the Android Diagnosis index. No data to show yet.")
+	    return HttpResponse("Hello! You're at the Android Diagnosis index. Not allowed action.")
 	   # context = {'foo': 'bar'}
 	    #return render(request, 'index.html', context)
+
+def indexcpu(request):
+	if (request.method == "GET"):
+		#data = request.GET.get('username')
+	# 	try:
+	# 		last = json.loads(GenericData.objects.all()[GenericData.objects.count()-1].jsondata)
+	# #return render(request, 'index.html', data)''
+
+	# 		return (HttpResponse("last field:" + last['field']))
+	# 		#return HttpResponse(json.dumps(last))
+	# 	except:
+	# 		return HttpResponse("Hello! You're at the Android Diagnosis index. No data to show yet or Exception happened.")
+		return render(request, 'cpu.html')
+	else:	
+	    return HttpResponse("Hello! You're at the Android Diagnosis index. Not allowed action.")
+
+def indexremotetest(request):
+	if (request.method == "GET"):
+		#data = request.GET.get('username')
+	# 	try:
+	# 		last = json.loads(GenericData.objects.all()[GenericData.objects.count()-1].jsondata)
+	# #return render(request, 'index.html', data)''
+
+	# 		return (HttpResponse("last field:" + last['field']))
+	# 		#return HttpResponse(json.dumps(last))
+	# 	except:
+	# 		return HttpResponse("Hello! You're at the Android Diagnosis index. No data to show yet or Exception happened.")
+		return render(request, 'remote_testing.html')
+	else:	
+	    return HttpResponse("Hello! You're at the Android Diagnosis index. Not allowed action.")
+
+def runbattery(request):
+	if request.method == "GET":
+		test = TestInfo.objects.create(idnum=TestInfo.objects.count(), name = "Low Battery", status = "Pending", message="...")
+		test.save()
+		return HttpResponseRedirect("../test")
+
 #@ensure_csrf_cookie
 @csrf_exempt
 @api_view(['POST'])

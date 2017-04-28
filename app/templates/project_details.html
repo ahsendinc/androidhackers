@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Android Hackers</title>
+
+   <!-- Bootstrap -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="../css/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="../css/nprogress.css" rel="stylesheet">
+
+     <!-- iCheck -->
+    <link href="../css/green.css" rel="stylesheet">
+
+    
+    <!-- Custom styling plus plugins -->
+    <link href="../css/custom.min.css" rel="stylesheet">
+  </head>
+
+  <body class="nav-md">
+    <div class="container body">
+      <div class="main_container">
+        <div class="col-md-3 left_col">
+          <div class="left_col scroll-view">
+            <div class="navbar nav_title" style="border: 0;">
+              <a href="battery.html" class="site_title"><i class="fa fa-android"></i> <span>Android Debug</span></a>
+            </div>
+
+            <div class="clearfix"></div>
+
+            
+
+            <br />
+
+            <!-- sidebar menu -->
+            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+              <div class="menu_section">
+                <h3>Menu</h3>
+                <ul class="nav side-menu">
+                  <li><a><i class="fa fa-home"></i> Statistics <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="battery.html">Battery</a></li>
+                      <li><a href="cpu.html">CPU and RAM</a></li>
+                      <li><a href="remote_testing.html">Run Tests</a></li>
+                    </ul>
+                  </li>
+                  
+                  <li><a><i class="fa fa-desktop"></i> About <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="project_details.html">Project Details</a></li>
+                      <li><a href="report.html">Report</a></li>
+                      <li><a href="contacts.html">Our Team</a></li>
+                      
+                    </ul>
+                  </li>
+                  
+              </div>
+              
+
+            </div>
+            <!-- /sidebar menu -->
+
+            
+          </div>
+        </div>
+
+         <!-- top navigation -->
+        <div class="top_nav">
+          <div class="nav_menu">
+            <nav>
+              <div class="nav toggle">
+                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+              </div>
+            </nav>
+          </div>
+        </div>
+        <!-- /top navigation -->
+
+        
+
+        <!-- page content -->
+        <div class="right_col" role="main">
+          <div class="">
+            <div class="page-title">
+              <div class="title_left">
+                <h3>About this project </h3>
+              </div>
+
+              
+            </div>
+
+            <div class="clearfix"></div>
+
+          
+
+            <div class="x_panel">
+                  <div class="x_title">
+                    <h2><i class="fa fa-align-left"></i> Project Information <small>Find us on <a href=https://github.com/ahsendinc/androidhackers> github </a> and <a href=https://bitbucket.org/ahsndnc/androidhackers.git> bitbucket </a> <i class="fa fa-github-square"></i> <i class="fa fa-bitbucket-square"></i></small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+
+                    <!-- start accordion -->
+                    <div class="accordion" id="accordion" role="tablist" aria-multiselectable="true">
+                      <div class="panel">
+                        <a class="panel-heading" role="tab" id="headingOne" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                          <h4 class="panel-title">General Information</h4>
+                        </a>
+                        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                          <div class="panel-body">
+                          <p>
+                            <p>This project was created for Software Testing during the Spring 2017 semester at the University of Texas at Austin.</p>
+                            <p>The purpose of this project is to test and debug an Android phone. This project has two aims: <li> Obtain continuous diagnostic information from an Android phone <li> Run tests on the phone to simulate desired testing conditions, such as low battery</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="panel">
+                        <a class="panel-heading collapsed" role="tab" id="headingTwo" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                          <h4 class="panel-title">Aim 1: Continuous Android Diagnosis</h4>
+                        </a>
+                        <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                          <div class="panel-body">
+                            <p>
+                            </p>
+                            <p>We report information from the Android phone overtime including: battey level, battery temperature, battery status, CPU usage, and RAM. This can be used to confirm or help diagnose problems users may experience with their phones. For example, if a user compains that her phone is running slowly, or the battery is draining quickly, she can see how the battery level is changing over time and which apps are the most CPU intensive.</p>
+
+                          </div>
+                        </div>
+                      </div>
+                      <div class="panel">
+                        <a class="panel-heading collapsed" role="tab" id="headingThree" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                          <h4 class="panel-title">Aim 2: Test Android Conditions</h4>
+                        </a>
+                        <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                          <div class="panel-body">
+                            <p>
+                            </p>
+                            It is good practice to test software in extreme conditions, but it is generally undesirable to actually cause these conditions. We can mimic these types of situations (low battery, high temerature, etc.). We test that certain conditions cause different behavior for our program. For example, in low battery situations we send debug data less frequently and we test that it acutally does. We display whether these tests pass/fail for our application.
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="panel">
+                        <a class="panel-heading collapsed" role="tab" id="headingFour" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                          <h4 class="panel-title">Our Methods</h4>
+                        </a>
+                        <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+                          <div class="panel-body">
+                          <p> </p>
+                            <p> We used the command "adb dumpsys" to obtain diagnostic information from the Android phone. To continuously and wirelessly send debug information, we rooted the Android and pushed a Python script that captures relevant data. This diagnostic information is displayed in Statistics and updates every 5 minutes. 
+                            </p> <br> <p>
+                            When running custom tests on the phone, the user selects which test to run on the webapp. This sends a post request to the Android phone to run the relevant Python script. Pass/fail results are displayed in Run Tests. </p>
+                            
+                          </div>
+                        </div>
+                      </div>
+          </div>
+        </div>
+        <!-- /page content -->
+
+        <!-- footer content -->
+        <footer>
+          <div class="pull-right">
+            Android Hackers Project from <a href="http://www.ece.utexas.edu/">UT Austin | ECE Department</a>
+          </div>
+          <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
+      </div>
+    </div>
+
+     <!-- jQuery -->
+    <script src="../js/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="../js/bootstrap.min.js"></script>
+    <!-- FastClick -->
+    <script src="../js/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="../js/nprogress.js"></script>
+
+    <!-- iCheck -->
+    <script src="../js/icheck.min.js"></script>
+
+   
+    <!-- Custom Theme Scripts -->
+    <script src="../js/custom.min.js"></script>
+  </body>
+</html>

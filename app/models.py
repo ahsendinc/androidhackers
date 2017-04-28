@@ -80,6 +80,12 @@ class MemInfoUsedRam(models.Model):
 	time = models.DateTimeField()
 	value = models.IntegerField()
 
+class TestInfo(models.Model):
+	idnum = models.IntegerField()
+	name = models.CharField(max_length=500)
+	status = models.CharField(max_length=500)
+	message = models.CharField(max_length=500)
+
 class GenericData (models.Model):
 	pubdate = models.DateTimeField(auto_now_add=True)
 	jsondata = models.CharField(max_length=500)
