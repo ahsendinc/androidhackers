@@ -36,75 +36,7 @@
   
   <!-- <link rel="stylesheet" href="../vendors/morris.js/examples/lib/example.css"> -->
   <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/prettify/r224/prettify.min.css">
-  <link rel="stylesheet" href="{% static 'css/morris.css' %}">
-    
-    <!-- ============ CPU Total Chart ============= -->
-<script type="text/javascript">
-  $(function () {
-    var timestamp_data = [
-  {"period": 1349046000000, "value": 25},
-  {"period": 1313103600000, "value": 54},
-  {"period": 1299110400000, "value": 90},
-  {"period": 1281222000000, "value": 78},
-  {"period": 1273446000000, "value": 45},
-  {"period": 1268524800000, "value": 54},
-  {"period": 1263081600000, "value": 45},
-  {"period": 1260403200000, "value": 23},
-  {"period": 1254870000000, "value": 76},
-  {"period": 1253833200000, "value": 100}
-];
-Morris.Line({
-  element: 'cpu_total',
-  data: timestamp_data,
-  xkey: 'period',
-  ykeys: ['value'],
-  yLabelFormat: function(value) {
-                  return value + '%'; 
-                },
-  labels: ['battery value'],
-  dateFormat: function (x) { return new Date(x).toDateString(); }
-});
-});
-  </script>
-<!-- ============ CPU Total Chart ============= -->
 
-<!-- ============== CPU LOAD ================== -->
-<!-- ONLY NEED TO DISPLAY CURRENT DATA -->
-<script type="text/javascript">
-  $(function () {
-    var day_data = [
-  {"period": "Timestamp", "1 min avg": 4.81, "5 min avg": 5.40, "15 min avg": 4.98}
-  
-];
-Morris.Bar({
-  element: 'cpu_load',
-  data: day_data,
-  xkey: 'period',
-  ykeys: ['1 min avg', '5 min avg', '15 min avg'],
-  labels: ['1 min avg', '5 min avg', '15 min avg'],
-  hideHover: 'auto'
-});
-});
-  </script>
-
-
-<!-- ============== CPU LOAD ================== -->
-
-<!-- ============== RAM CHART ========== -->
-<script type="text/javascript">
-  $(function () {
-   
-Morris.Donut({
-  element: 'RAM',
-  data: [
-    {value: 48, label: 'Free RAM', formatted:"" },
-    {value: 52, label: 'Used Ram', formatted: "" },
-    
-  ],
-  formatter: function (x, data) { return data.value + "%"; }
-});
-});
-  </script>
 
 
 <!-- ============== RAM CHART ========== -->
@@ -460,6 +392,76 @@ Morris.Donut({
     <!-- morris.js -->
     <script src="{% static 'js/raphael.min.js' %}"></script>
     <script src="{% static 'js/morris.min.js' %}"></script>
+
+      <link rel="stylesheet" href="{% static 'css/morris.css' %}">
+    
+    <!-- ============ CPU Total Chart ============= -->
+<script type="text/javascript">
+  $(function () {
+    var timestamp_data = [
+  {"period": 1349046000000, "value": 25},
+  {"period": 1313103600000, "value": 54},
+  {"period": 1299110400000, "value": 90},
+  {"period": 1281222000000, "value": 78},
+  {"period": 1273446000000, "value": 45},
+  {"period": 1268524800000, "value": 54},
+  {"period": 1263081600000, "value": 45},
+  {"period": 1260403200000, "value": 23},
+  {"period": 1254870000000, "value": 76},
+  {"period": 1253833200000, "value": 100}
+];
+Morris.Line({
+  element: 'cpu_total',
+  data: timestamp_data,
+  xkey: 'period',
+  ykeys: ['value'],
+  yLabelFormat: function(value) {
+                  return value + '%'; 
+                },
+  labels: ['battery value'],
+  dateFormat: function (x) { return new Date(x).toDateString(); }
+});
+});
+  </script>
+<!-- ============ CPU Total Chart ============= -->
+
+<!-- ============== CPU LOAD ================== -->
+<!-- ONLY NEED TO DISPLAY CURRENT DATA -->
+<script type="text/javascript">
+  $(function () {
+    var day_data = [
+  {"period": "Timestamp", "1 min avg": 4.81, "5 min avg": 5.40, "15 min avg": 4.98}
+  
+];
+Morris.Bar({
+  element: 'cpu_load',
+  data: day_data,
+  xkey: 'period',
+  ykeys: ['1 min avg', '5 min avg', '15 min avg'],
+  labels: ['1 min avg', '5 min avg', '15 min avg'],
+  hideHover: 'auto'
+});
+});
+  </script>
+
+
+<!-- ============== CPU LOAD ================== -->
+
+<!-- ============== RAM CHART ========== -->
+<script type="text/javascript">
+  $(function () {
+   
+Morris.Donut({
+  element: 'RAM',
+  data: [
+    {value: 48, label: 'Free RAM', formatted:"" },
+    {value: 52, label: 'Used Ram', formatted: "" },
+    
+  ],
+  formatter: function (x, data) { return data.value + "%"; }
+});
+});
+  </script>
     
   </body>
 </html>
