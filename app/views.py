@@ -162,12 +162,12 @@ def postdata(request):
 			# serialized = CPUKernelSerializer(data=mylist, many=True)
 			# if serialized.is_valid():
 			# 	serialized.save()
-
-			listOfThings = request.data['cpu_user']
-			mylist = json.loads(listOfThings)
-			serialized = CPUUserSerializer(data=mylist, many=True)
-			if serialized.is_valid():
-				serialized.save()
+#deletecpuuser
+			# listOfThings = request.data['cpu_user']
+			# mylist = json.loads(listOfThings)
+			# serialized = CPUUserSerializer(data=mylist, many=True)
+			# if serialized.is_valid():
+			# 	serialized.save()
 
 			listOfThings = request.data['cpu_load1']
 			mylist = json.loads(listOfThings)
