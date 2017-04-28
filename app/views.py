@@ -73,6 +73,25 @@ def indexremotetest(request):
 		return render(request, 'remote_testing.html',{"query":query})
 	else:	
 	    return HttpResponse("Hello! You're at the Android Diagnosis index. Not allowed action.")
+
+def indexproject(request):
+	if (request.method == "GET"):
+		return render(request, 'project_details.html')
+	else:	
+	    return HttpResponse("Hello! You're at the Android Diagnosis index. Not allowed action.")
+
+def indexreport(request):
+	if (request.method == "GET"):
+		return render(request, 'report.html')
+	else:	
+	    return HttpResponse("Hello! You're at the Android Diagnosis index. Not allowed action.")
+
+def indexcontacts(request):
+	if (request.method == "GET"):
+		return render(request, 'contacts.html')
+	else:	
+	    return HttpResponse("Hello! You're at the Android Diagnosis index. Not allowed action.")
+
 def gettestinfo(request):
 	if request.method == "GET":
 		test = TestInfo.objects.first()
