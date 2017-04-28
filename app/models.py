@@ -68,6 +68,17 @@ class CPUHog5(models.Model):
 	value = models.IntegerField()
 	name = models.CharField(max_length=1000)
 
+class MemInfoTotalRam(models.Model):
+	time = models.DateTimeField()
+	value = models.IntegerField()
+
+class MemInfoFreeRam(models.Model):
+	time = models.DateTimeField()
+	value = models.IntegerField()
+
+class MemInfoUsedRam(models.Model):
+	time = models.DateTimeField()
+	value = models.IntegerField()
 
 class GenericData (models.Model):
 	pubdate = models.DateTimeField(auto_now_add=True)

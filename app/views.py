@@ -3,7 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.template import RequestContext
 from django.views.decorators.csrf import ensure_csrf_cookie
-from .models import GenericData, Data, BatteryStatus, BatteryHealth, BatteryLevel, BatteryTemperature, CPUTotal, CPUUser, CPUKernel, CPULoad1, CPULoad2, CPULoad3, CPUHog1, CPUHog2, CPUHog3, CPUHog4, CPUHog5
+from .models import GenericData, Data, BatteryStatus, BatteryHealth, BatteryLevel, BatteryTemperature, CPUTotal, CPUUser, CPUKernel, CPULoad1, CPULoad2, CPULoad3, CPUHog1, CPUHog2, CPUHog3, CPUHog4, CPUHog5, MemInfoTotalRam, MemInfoFreeRam, MemInfoUsedRam
 from rest_framework import viewsets
 from .serializers import GenericDataSerializer, UserSerializer, GroupSerializer, DataSerializer
 from .serializers import BatteryStatusSerializer, BatteryHealthSerializer, BatteryLevelSerializer, BatteryTemperatureSerializer,MultBatteryStatusSerializer
@@ -22,7 +22,7 @@ from django.views.decorators.csrf import ensure_csrf_cookie, csrf_exempt
 from rest_framework.mixins import CreateModelMixin
 from rest_framework.renderers import JSONRenderer
 
-from .serializers import CPUTotalSerializer, CPUUserSerializer, CPUKernelSerializer, CPULoad1Serializer, CPULoad2Serializer,CPULoad3Serializer, CPUHog1Serializer, CPUHog2Serializer, CPUHog3Serializer, CPUHog4Serializer, CPUHog5Serializer
+from .serializers import CPUTotalSerializer, CPUUserSerializer, CPUKernelSerializer, CPULoad1Serializer, CPULoad2Serializer,CPULoad3Serializer, CPUHog1Serializer, CPUHog2Serializer, CPUHog3Serializer, CPUHog4Serializer, CPUHog5Serializer, MemInfoTotalRamSerializer, MemInfoFreeRamSerializer, MemInfoUsedRamSerializer
 # Create your views here.
 #@ensure_csrf_cookie
 def index(request):
@@ -136,6 +136,24 @@ def postdata(request):
 			listOfThings = request.data['cpu_hog5']
 			mylist = json.loads(listOfThings)
 			serialized = CPUHog5Serializer(data=mylist, many=True)
+			if serialized.is_valid():
+				serialized.save()
+
+			listOfThings = request.data['meminfo_totalram']
+			mylist = json.loads(listOfThings)
+			serialized = MemInfoTotalRamSerializer(data=mylist, many=True)
+			if serialized.is_valid():
+				serialized.save()
+
+			listOfThings = request.data['meminfo_freeram']
+			mylist = json.loads(listOfThings)
+			serialized = MemInfoFreeRamSerializer(data=mylist, many=True)
+			if serialized.is_valid():
+				serialized.save()
+
+			listOfThings = request.data['meminfo_usedram']
+			mylist = json.loads(listOfThings)
+			serialized = MemInfoUsedRamSerializer(data=mylist, many=True)
 			if serialized.is_valid():
 				serialized.save()
 
@@ -512,6 +530,71 @@ class CPUHog5ViewSet(viewsets.ModelViewSet):
 			return HttpResponse("created",status=201)
         
 		return HttpResponse(request.data,status=404)
+
+
+class MemInfoTotalRamViewSet(viewsets.ModelViewSet):
+
+	queryset = MemInfoTotalRam.objects.all()
+	serializer_class= MemInfoTotalRamSerializer
+
+	def create(self, request, *args, **kwargs):
+		try:
+			listOfThings = request.data['meminfo_totalram']
+			mylist = json.loads(listOfThings)
+			print(listOfThings)
+			serializer = self.get_serializer(data=mylist, many= True)
+		except KeyError:
+			mylist = request.data
+			serializer = self.get_serializer(data=mylist)
+
+		if serializer.is_valid():
+			serializer.save()
+			return HttpResponse("created",status=201)
+        
+		return HttpResponse(request.data,status=404)
+
+class MemInfoFreeRamViewSet(viewsets.ModelViewSet):
+
+	queryset = MemInfoFreeRam.objects.all()
+	serializer_class= MemInfoFreeRamSerializer
+
+	def create(self, request, *args, **kwargs):
+		try:
+			listOfThings = request.data['meminfo_freeram']
+			mylist = json.loads(listOfThings)
+			print(listOfThings)
+			serializer = self.get_serializer(data=mylist, many= True)
+		except KeyError:
+			mylist = request.data
+			serializer = self.get_serializer(data=mylist)
+
+		if serializer.is_valid():
+			serializer.save()
+			return HttpResponse("created",status=201)
+        
+		return HttpResponse(request.data,status=404)
+
+class MemInfoUsedRamViewSet(viewsets.ModelViewSet):
+
+	queryset = MemInfoUsedRam.objects.all()
+	serializer_class= MemInfoUsedRamSerializer
+
+	def create(self, request, *args, **kwargs):
+		try:
+			listOfThings = request.data['meminfo_usedram']
+			mylist = json.loads(listOfThings)
+			print(listOfThings)
+			serializer = self.get_serializer(data=mylist, many= True)
+		except KeyError:
+			mylist = request.data
+			serializer = self.get_serializer(data=mylist)
+
+		if serializer.is_valid():
+			serializer.save()
+			return HttpResponse("created",status=201)
+        
+		return HttpResponse(request.data,status=404)
+
 class DataViewSet(viewsets.ModelViewSet):
 
 	queryset = Data.objects.all()

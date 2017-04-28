@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User,Group 
-from .models import GenericData, Data, BatteryStatus, BatteryHealth, BatteryLevel, BatteryTemperature, CPUTotal, CPUUser, CPUKernel, CPULoad1, CPULoad2, CPULoad3, CPUHog1, CPUHog2, CPUHog3, CPUHog4, CPUHog5
+from .models import GenericData, Data, BatteryStatus, BatteryHealth, BatteryLevel, BatteryTemperature, CPUTotal, CPUUser, CPUKernel, CPULoad1, CPULoad2, CPULoad3, CPUHog1, CPUHog2, CPUHog3, CPUHog4, CPUHog5, MemInfoUsedRam, MemInfoTotalRam, MemInfoFreeRam
 from rest_framework import serializers
 
 class BatteryLevelSerializer(serializers.HyperlinkedModelSerializer):
@@ -93,6 +93,23 @@ class CPUHog5Serializer(serializers.HyperlinkedModelSerializer):
 		model = CPUHog5
 		fields = ('time','value','name')
 
+class MemInfoTotalRamSerializer(serializers.HyperlinkedModelSerializer):
+
+	class Meta:
+		model = MemInfoTotalRam
+		fields = ('time','value')
+
+class MemInfoFreeRamSerializer(serializers.HyperlinkedModelSerializer):
+
+	class Meta:
+		model = MemInfoFreeRam
+		fields = ('time','value')
+
+class MemInfoUsedRamSerializer(serializers.HyperlinkedModelSerializer):
+
+	class Meta:
+		model = MemInfoUsedRam
+		fields = ('time','value')
 
 class MultBatteryStatusSerializer(serializers.Serializer):
     battery_status = BatteryStatusSerializer(many=True)
