@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User,Group 
-from .models import GenericData, Data, BatteryStatus, BatteryHealth, BatteryLevel, BatteryTemperature
+from .models import GenericData, Data, BatteryStatus, BatteryHealth, BatteryLevel, BatteryTemperature, CPUTotal, CPUUser, CPUKernel, CPULoad1, CPULoad2, CPULoad3, CPUHog1, CPUHog2, CPUHog3, CPUHog4, CPUHog5
 from rest_framework import serializers
 
 class BatteryLevelSerializer(serializers.HyperlinkedModelSerializer):
@@ -13,7 +13,7 @@ class BatteryTemperatureSerializer(serializers.HyperlinkedModelSerializer):
 		fields = ('time','value')
 
 class BatteryHealthSerializer(serializers.HyperlinkedModelSerializer):
-	
+
 	class Meta:
 		model = BatteryHealth
 		fields = ('time','value')
@@ -27,6 +27,72 @@ class BatteryStatusSerializer(serializers.HyperlinkedModelSerializer):
 		model = BatteryStatus
 		fields = ('value','time')
 
+class CPUTotalSerializer(serializers.HyperlinkedModelSerializer):
+
+	class Meta:
+		model = CPUTotal
+		fields = ('time','value')
+
+class CPUUserSerializer(serializers.HyperlinkedModelSerializer):
+
+	class Meta:
+		model = CPUUser
+		fields = ('time','value')
+
+class CPUKernelSerializer(serializers.HyperlinkedModelSerializer):
+
+	class Meta:
+		model = CPUKernel
+		fields = ('time','value')
+
+class CPULoad1Serializer(serializers.HyperlinkedModelSerializer):
+
+	class Meta:
+		model = CPULoad1
+		fields = ('time','value')
+
+class CPULoad2Serializer(serializers.HyperlinkedModelSerializer):
+
+	class Meta:
+		model = CPULoad2
+		fields = ('time','value')
+
+class CPULoad3Serializer(serializers.HyperlinkedModelSerializer):
+
+	class Meta:
+		model = CPULoad3
+		fields = ('time','value')
+
+class CPUHog1Serializer(serializers.HyperlinkedModelSerializer):
+
+	class Meta:
+		model = CPUHog1
+		fields = ('time','value','name')
+
+class CPUHog2Serializer(serializers.HyperlinkedModelSerializer):
+
+	class Meta:
+		model = CPUHog2
+		fields = ('time','value','name')
+
+class CPUHog3Serializer(serializers.HyperlinkedModelSerializer):
+
+	class Meta:
+		model = CPUHog3
+		fields = ('time','value','name')
+
+class CPUHog4Serializer(serializers.HyperlinkedModelSerializer):
+
+	class Meta:
+		model = CPUHog4
+		fields = ('time','value','name')
+
+class CPUHog5Serializer(serializers.HyperlinkedModelSerializer):
+
+	class Meta:
+		model = CPUHog5
+		fields = ('time','value','name')
+
 
 class MultBatteryStatusSerializer(serializers.Serializer):
     battery_status = BatteryStatusSerializer(many=True)
@@ -35,6 +101,7 @@ class MultBatteryStatusSerializer(serializers.Serializer):
     	batterystatus_datas = validated_data.pop('battery_status')
     	for batterystatus_data in batterystatus_datas:
 		    BatteryStatus.objects.create(**batterystatus_data)
+
 
 class DataSerializer(serializers.HyperlinkedModelSerializer):
 	# battery_status = BatteryStatusSerializer(many=True) 

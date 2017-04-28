@@ -3,7 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.template import RequestContext
 from django.views.decorators.csrf import ensure_csrf_cookie
-from .models import GenericData, Data, BatteryStatus, BatteryHealth, BatteryLevel, BatteryTemperature
+from .models import GenericData, Data, BatteryStatus, BatteryHealth, BatteryLevel, BatteryTemperature, CPUTotal, CPUUser, CPUKernel, CPULoad1, CPULoad2, CPULoad3, CPUHog1, CPUHog2, CPUHog3, CPUHog4, CPUHog5
 from rest_framework import viewsets
 from .serializers import GenericDataSerializer, UserSerializer, GroupSerializer, DataSerializer
 from .serializers import BatteryStatusSerializer, BatteryHealthSerializer, BatteryLevelSerializer, BatteryTemperatureSerializer,MultBatteryStatusSerializer
@@ -21,6 +21,8 @@ from rest_framework import routers
 from django.views.decorators.csrf import ensure_csrf_cookie, csrf_exempt
 from rest_framework.mixins import CreateModelMixin
 from rest_framework.renderers import JSONRenderer
+
+from .serializers import CPUTotalSerializer, CPUUserSerializer, CPUKernelSerializer, CPULoad1Serializer, CPULoad2Serializer,CPULoad3Serializer, CPUHog1Serializer, CPUHog2Serializer, CPUHog3Serializer, CPUHog4Serializer, CPUHog5Serializer
 # Create your views here.
 #@ensure_csrf_cookie
 def index(request):
@@ -45,31 +47,102 @@ def postdata(request):
 	if (request.method == "POST"):
 		
 		#return HttpResponse(request.POST.getlist('battery_status')[0])
-		listOfThings = request.data['battery_status']
-		mylist = json.loads(listOfThings)
-		serialized = BatteryStatusSerializer(data=mylist, many=True)
-		if serialized.is_valid():
-			serialized.save()
+		try:
+			listOfThings = request.data['battery_status']
+			mylist = json.loads(listOfThings)
+			serialized = BatteryStatusSerializer(data=mylist, many=True)
+			if serialized.is_valid():
+				serialized.save()
 
-		listOfThings = request.data['battery_level']
-		mylist = json.loads(listOfThings)
-		serialized = BatteryLevelSerializer(data=mylist, many=True)
-		if serialized.is_valid():
-			serialized.save()
+			listOfThings = request.data['battery_level']
+			mylist = json.loads(listOfThings)
+			serialized = BatteryLevelSerializer(data=mylist, many=True)
+			if serialized.is_valid():
+				serialized.save()
 
-		listOfThings = request.data['battery_temperature']
-		mylist = json.loads(listOfThings)
-		serialized = BatteryTemperatureSerializer(data=mylist, many=True)
-		if serialized.is_valid():
-			serialized.save()
+			listOfThings = request.data['battery_temperature']
+			mylist = json.loads(listOfThings)
+			serialized = BatteryTemperatureSerializer(data=mylist, many=True)
+			if serialized.is_valid():
+				serialized.save()
 
-		listOfThings = request.data['battery_health']
-		mylist = json.loads(listOfThings)
-		serialized = BatteryHealthSerializer(data=mylist, many=True)
-		if serialized.is_valid():
-			serialized.save()
-			#jsondata = JSONRenderer().render(serialized.data)
-			return HttpResponse(('created'), status=201)
+			listOfThings = request.data['battery_health']
+			mylist = json.loads(listOfThings)
+			serialized = BatteryHealthSerializer(data=mylist, many=True)
+			if serialized.is_valid():
+				serialized.save()
+				#jsondata = JSONRenderer().render(serialized.data)
+
+			listOfThings = request.data['cpu_total']
+			mylist = json.loads(listOfThings)
+			serialized = CPUTotalSerializer(data=mylist, many=True)
+			if serialized.is_valid():
+				serialized.save()
+
+			listOfThings = request.data['cpu_kernel']
+			mylist = json.loads(listOfThings)
+			serialized = CPUKernelSerializer(data=mylist, many=True)
+			if serialized.is_valid():
+				serialized.save()
+
+			listOfThings = request.data['cpu_user']
+			mylist = json.loads(listOfThings)
+			serialized = CPUUserSerializer(data=mylist, many=True)
+			if serialized.is_valid():
+				serialized.save()
+
+			listOfThings = request.data['cpu_load1']
+			mylist = json.loads(listOfThings)
+			serialized = CPULoad1Serializer(data=mylist, many=True)
+			if serialized.is_valid():
+				serialized.save()	
+
+			listOfThings = request.data['cpu_load2']
+			mylist = json.loads(listOfThings)
+			serialized = CPULoad2Serializer(data=mylist, many=True)
+			if serialized.is_valid():
+				serialized.save()
+
+			listOfThings = request.data['cpu_load3']
+			mylist = json.loads(listOfThings)
+			serialized = CPULoad3Serializer(data=mylist, many=True)
+			if serialized.is_valid():
+				serialized.save()
+
+			listOfThings = request.data['cpu_hog1']
+			mylist = json.loads(listOfThings)
+			serialized = CPUHog1Serializer(data=mylist, many=True)
+			if serialized.is_valid():
+				serialized.save()
+
+			listOfThings = request.data['cpu_hog2']
+			mylist = json.loads(listOfThings)
+			serialized = CPUHog2Serializer(data=mylist, many=True)
+			if serialized.is_valid():
+				serialized.save()
+
+			listOfThings = request.data['cpu_hog3']
+			mylist = json.loads(listOfThings)
+			serialized = CPUHog3Serializer(data=mylist, many=True)
+			if serialized.is_valid():
+				serialized.save()
+
+			listOfThings = request.data['cpu_hog4']
+			mylist = json.loads(listOfThings)
+			serialized = CPUHog4Serializer(data=mylist, many=True)
+			if serialized.is_valid():
+				serialized.save()
+
+			listOfThings = request.data['cpu_hog5']
+			mylist = json.loads(listOfThings)
+			serialized = CPUHog5Serializer(data=mylist, many=True)
+			if serialized.is_valid():
+				serialized.save()
+
+				return HttpResponse(('created'), status=201)
+
+		except:
+				return HttpResponse('notcreated', status=500)
 		#jsond = json.dumps(request.POST.getlist('tracks'))
 		return HttpResponse('notcreated', status=400)
 
@@ -209,6 +282,236 @@ class BatteryTemperatureViewSet(viewsets.ModelViewSet):
         
 		return HttpResponse(request.data,status=404)
 
+class CPUTotalViewSet(viewsets.ModelViewSet):
+
+	queryset = CPUTotal.objects.all()
+	serializer_class= CPUTotalSerializer
+
+	def create(self, request, *args, **kwargs):
+		try:
+			listOfThings = request.data['cpu_total']
+			mylist = json.loads(listOfThings)
+			print(listOfThings)
+			serializer = self.get_serializer(data=mylist, many= True)
+		except KeyError:
+			mylist = request.data
+			serializer = self.get_serializer(data=mylist)
+
+		if serializer.is_valid():
+			serializer.save()
+			return HttpResponse("created",status=201)
+        
+		return HttpResponse(request.data,status=404)
+
+class CPUUserViewSet(viewsets.ModelViewSet):
+
+	queryset = CPUUser.objects.all()
+	serializer_class= CPUUserSerializer
+
+	def create(self, request, *args, **kwargs):
+		try:
+			listOfThings = request.data['cpu_user']
+			mylist = json.loads(listOfThings)
+			print(listOfThings)
+			serializer = self.get_serializer(data=mylist, many= True)
+		except KeyError:
+			mylist = request.data
+			serializer = self.get_serializer(data=mylist)
+
+		if serializer.is_valid():
+			serializer.save()
+			return HttpResponse("created",status=201)
+        
+		return HttpResponse(request.data,status=404)
+
+class CPUKernelViewSet(viewsets.ModelViewSet):
+
+	queryset = CPUKernel.objects.all()
+	serializer_class= CPUKernelSerializer
+
+	def create(self, request, *args, **kwargs):
+		try:
+			listOfThings = request.data['cpu_kernel']
+			mylist = json.loads(listOfThings)
+			print(listOfThings)
+			serializer = self.get_serializer(data=mylist, many= True)
+		except KeyError:
+			mylist = request.data
+			serializer = self.get_serializer(data=mylist)
+
+		if serializer.is_valid():
+			serializer.save()
+			return HttpResponse("created",status=201)
+        
+		return HttpResponse(request.data,status=404)
+
+class CPULoad1ViewSet(viewsets.ModelViewSet):
+
+	queryset = CPULoad1.objects.all()
+	serializer_class= CPULoad1Serializer
+
+	def create(self, request, *args, **kwargs):
+		try:
+			listOfThings = request.data['cpu_load1']
+			mylist = json.loads(listOfThings)
+			print(listOfThings)
+			serializer = self.get_serializer(data=mylist, many= True)
+		except KeyError:
+			mylist = request.data
+			serializer = self.get_serializer(data=mylist)
+
+		if serializer.is_valid():
+			serializer.save()
+			return HttpResponse("created",status=201)
+        
+		return HttpResponse(request.data,status=404)
+
+class CPULoad2ViewSet(viewsets.ModelViewSet):
+
+	queryset = CPULoad2.objects.all()
+	serializer_class= CPULoad2Serializer
+
+	def create(self, request, *args, **kwargs):
+		try:
+			listOfThings = request.data['cpu_load2']
+			mylist = json.loads(listOfThings)
+			print(listOfThings)
+			serializer = self.get_serializer(data=mylist, many= True)
+		except KeyError:
+			mylist = request.data
+			serializer = self.get_serializer(data=mylist)
+
+		if serializer.is_valid():
+			serializer.save()
+			return HttpResponse("created",status=201)
+        
+		return HttpResponse(request.data,status=404)
+
+class CPULoad3ViewSet(viewsets.ModelViewSet):
+
+	queryset = CPULoad3.objects.all()
+	serializer_class= CPULoad3Serializer
+
+	def create(self, request, *args, **kwargs):
+		try:
+			listOfThings = request.data['cpu_load3']
+			mylist = json.loads(listOfThings)
+			print(listOfThings)
+			serializer = self.get_serializer(data=mylist, many= True)
+		except KeyError:
+			mylist = request.data
+			serializer = self.get_serializer(data=mylist)
+
+		if serializer.is_valid():
+			serializer.save()
+			return HttpResponse("created",status=201)
+        
+		return HttpResponse(request.data,status=404)
+
+class CPUHog1ViewSet(viewsets.ModelViewSet):
+
+	queryset = CPUHog1.objects.all()
+	serializer_class= CPUHog1Serializer
+
+	def create(self, request, *args, **kwargs):
+		try:
+			listOfThings = request.data['cpu_hog1']
+			mylist = json.loads(listOfThings)
+			print(listOfThings)
+			serializer = self.get_serializer(data=mylist, many= True)
+		except KeyError:
+			mylist = request.data
+			serializer = self.get_serializer(data=mylist)
+
+		if serializer.is_valid():
+			serializer.save()
+			return HttpResponse("created",status=201)
+        
+		return HttpResponse(request.data,status=404)
+
+class CPUHog2ViewSet(viewsets.ModelViewSet):
+
+	queryset = CPUHog2.objects.all()
+	serializer_class= CPUHog2Serializer
+
+	def create(self, request, *args, **kwargs):
+		try:
+			listOfThings = request.data['cpu_hog2']
+			mylist = json.loads(listOfThings)
+			print(listOfThings)
+			serializer = self.get_serializer(data=mylist, many= True)
+		except KeyError:
+			mylist = request.data
+			serializer = self.get_serializer(data=mylist)
+
+		if serializer.is_valid():
+			serializer.save()
+			return HttpResponse("created",status=201)
+        
+		return HttpResponse(request.data,status=404)
+
+class CPUHog3ViewSet(viewsets.ModelViewSet):
+
+	queryset = CPUHog3.objects.all()
+	serializer_class= CPUHog3Serializer
+
+	def create(self, request, *args, **kwargs):
+		try:
+			listOfThings = request.data['cpu_hog3']
+			mylist = json.loads(listOfThings)
+			print(listOfThings)
+			serializer = self.get_serializer(data=mylist, many= True)
+		except KeyError:
+			mylist = request.data
+			serializer = self.get_serializer(data=mylist)
+
+		if serializer.is_valid():
+			serializer.save()
+			return HttpResponse("created",status=201)
+        
+		return HttpResponse(request.data,status=404)
+
+class CPUHog4ViewSet(viewsets.ModelViewSet):
+
+	queryset = CPUHog4.objects.all()
+	serializer_class= CPUHog4Serializer
+
+	def create(self, request, *args, **kwargs):
+		try:
+			listOfThings = request.data['cpu_hog4']
+			mylist = json.loads(listOfThings)
+			print(listOfThings)
+			serializer = self.get_serializer(data=mylist, many= True)
+		except KeyError:
+			mylist = request.data
+			serializer = self.get_serializer(data=mylist)
+
+		if serializer.is_valid():
+			serializer.save()
+			return HttpResponse("created",status=201)
+        
+		return HttpResponse(request.data,status=404)
+
+class CPUHog5ViewSet(viewsets.ModelViewSet):
+
+	queryset = CPUHog5.objects.all()
+	serializer_class= CPUHog5Serializer
+
+	def create(self, request, *args, **kwargs):
+		try:
+			listOfThings = request.data['cpu_hog5']
+			mylist = json.loads(listOfThings)
+			print(listOfThings)
+			serializer = self.get_serializer(data=mylist, many= True)
+		except KeyError:
+			mylist = request.data
+			serializer = self.get_serializer(data=mylist)
+
+		if serializer.is_valid():
+			serializer.save()
+			return HttpResponse("created",status=201)
+        
+		return HttpResponse(request.data,status=404)
 class DataViewSet(viewsets.ModelViewSet):
 
 	queryset = Data.objects.all()
