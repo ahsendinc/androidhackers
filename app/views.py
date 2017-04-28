@@ -6,7 +6,7 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 from .models import GenericData, Data, BatteryStatus, BatteryHealth, BatteryLevel, BatteryTemperature
 from rest_framework import viewsets
 from .serializers import GenericDataSerializer, UserSerializer, GroupSerializer, DataSerializer
-from .serializers import BatteryStatusSerializer, BatteryHealthSerializer, BatteryLevelSerializer, BatteryTemperatureSerializer
+from .serializers import BatteryStatusSerializer, BatteryHealthSerializer, BatteryLevelSerializer, BatteryTemperatureSerializer,MultBatteryStatusSerializer
 from django.contrib.auth.models import User, Group
 import requests
 from django.contrib.auth.decorators import login_required
@@ -43,13 +43,14 @@ def index(request):
 @api_view(['POST'])
 def postdata(request):
 	if (request.method == "POST"):
-		serialized = BatteryStatusSerializer(data=request.POST.getlist('batterystatus'), many=True)
-
+		
+		#return HttpResponse(request.POST.getlist('battery_status')[0])
+		serialized = MultBatteryStatusSerializer(data=request.data, many=True)
 		if serialized.is_valid():
 			serialized.save()
 			jsondata = JSONRenderer().render(serialized.data)
-			return HttpResponse(request.data, status=201)
-		jsond = json.dumps(request.POST.getlist('batterystatus'))
+			return HttpResponse(dict(request.data.getlist('tracks')), status=201)
+		jsond = json.dumps(request.POST.getlist('tracks'))
 		return HttpResponse(jsond, status=400)
 
 
@@ -76,12 +77,12 @@ def postdata(request):
 		return HttpResponse("NOT POST")
 
 
-# class CreateListModelMixin(object):
+class CreateListModelMixin(object):
     
-# 	def get_serializer(self, *args, **kwargs):
-# 		if isinstance(kwargs.get('data',{}),list):
-# 			kwargs['many'] = True
-# 		return super(self).get_serializer(*args,**kwargs)
+	def get_serializer(self, *args, **kwargs):
+		if isinstance(kwargs.get('data',{}),list):
+			kwargs['many'] = True
+		return super(self).get_serializer(*args,**kwargs)
 
 
 
@@ -99,27 +100,31 @@ class BatteryStatusViewSet(viewsets.ModelViewSet):
 	# 	return super(CreateListModelMixin,self).get_serializer(*args,**kwargs)
 
 
-	# def create(self, request, *args, **kwargs):
-	# 	listOfThings = request.data['batterystatus']
-	# 	print(listOfThings)
-
-	# 	serializer = self.get_serializer(data=listOfThings, many= True)
-
-	# 	if serializer.is_valid():
-	# 		serializer.save()
-	# 		return HttpResponse("created",status=201)
-        
-	# 	return HttpResponse("not created",status=404)
 	def create(self, request, *args, **kwargs):
-		serializer = self.get_serializer(data=request.POST.getlist('batterystatus'), many=True)
+		try:
+			listOfThings = request.data['battery_status']
+			mylist = json.loads(listOfThings)
+			print(listOfThings)
+			serializer = self.get_serializer(data=mylist, many= True)
+		except KeyError:
+			mylist = request.data
+			serializer = self.get_serializer(data=mylist)
+
 		if serializer.is_valid():
-			for batterystatus_data in serializer.validated_data:
-			    obj = BatteryStatus.objects.create(time= batterystatus_data['time'], value = batterystatus_data['value'])
-			    obj.save()
-			HttpResponse("hey")
+			serializer.save()
+			return HttpResponse("created",status=201)
+        
+		return HttpResponse(request.data,status=404)
 
+	# def create(self, request, *args, **kwargs):
+	# 	serializer = self.get_serializer(data=request.data, many=True)
+	# 	serializer.is_valid(raise_exception=True)
+	# 	for batterystatus_data in serializer.validated_data:
+	# 	    obj = BatteryStatus.objects.create(time= batterystatus_data['time'], value = batterystatus_data['value'])
+	# 	    obj.save()
+	# 	    return HttpResponse("hey")
 
-		return HttpResponse(request.POST.getlist('batterystatus')['time'])
+	# 	return HttpResponse(serializer)
 
 
 class BatteryHealthViewSet(viewsets.ModelViewSet):

@@ -27,7 +27,13 @@ class BatteryStatusSerializer(serializers.HyperlinkedModelSerializer):
 		fields = ('value','time')
 
 
+class MultBatteryStatusSerializer(serializers.Serializer):
+    battery_status = BatteryStatusSerializer(many=True)
 
+    def create(self, validated_data):
+    	batterystatus_datas = validated_data.pop('battery_status')
+    	for batterystatus_data in batterystatus_datas:
+		    BatteryStatus.objects.create(**batterystatus_data)
 
 class DataSerializer(serializers.HyperlinkedModelSerializer):
 	# battery_status = BatteryStatusSerializer(many=True) 
