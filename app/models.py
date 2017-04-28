@@ -68,6 +68,7 @@ class CPUHog5(models.Model):
 	value = models.IntegerField()
 	name = models.CharField(max_length=1000)
 
+
 class GenericData (models.Model):
 	pubdate = models.DateTimeField(auto_now_add=True)
 	jsondata = models.CharField(max_length=500)

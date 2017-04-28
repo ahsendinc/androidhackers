@@ -15,7 +15,6 @@ django-fitbit==0.3.0
 django-picklefield==0.3.2
 django-rest-multiple-models==1.8.2
 djangorestframework==3.5.3
-fitbit==0.3.0
 gunicorn==19.6.0
 kombu==4.0.2
 numpy==1.11.2

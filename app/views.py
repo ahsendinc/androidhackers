@@ -45,14 +45,33 @@ def postdata(request):
 	if (request.method == "POST"):
 		
 		#return HttpResponse(request.POST.getlist('battery_status')[0])
-		serialized = MultBatteryStatusSerializer(data=request.data, many=True)
+		listOfThings = request.data['battery_status']
+		mylist = json.loads(listOfThings)
+		serialized = BatteryStatusSerializer(data=mylist, many=True)
 		if serialized.is_valid():
 			serialized.save()
-			jsondata = JSONRenderer().render(serialized.data)
-			return HttpResponse(dict(request.data.getlist('tracks')), status=201)
-		jsond = json.dumps(request.POST.getlist('tracks'))
-		return HttpResponse(jsond, status=400)
 
+		listOfThings = request.data['battery_level']
+		mylist = json.loads(listOfThings)
+		serialized = BatteryLevelSerializer(data=mylist, many=True)
+		if serialized.is_valid():
+			serialized.save()
+
+		listOfThings = request.data['battery_temperature']
+		mylist = json.loads(listOfThings)
+		serialized = BatteryTemperatureSerializer(data=mylist, many=True)
+		if serialized.is_valid():
+			serialized.save()
+
+		listOfThings = request.data['battery_health']
+		mylist = json.loads(listOfThings)
+		serialized = BatteryHealthSerializer(data=mylist, many=True)
+		if serialized.is_valid():
+			serialized.save()
+			#jsondata = JSONRenderer().render(serialized.data)
+			return HttpResponse(('created'), status=201)
+		#jsond = json.dumps(request.POST.getlist('tracks'))
+		return HttpResponse('notcreated', status=400)
 
 		#data = request.GET.get('username')
 		#return HttpResponse(request.POST.get('jsondata'))
@@ -74,15 +93,15 @@ def postdata(request):
 	# 	form = GenericDataForm()
 	# return render(request, 'index.html', {'form': form})
 	else:
-		return HttpResponse("NOT POST")
+		return HttpResponse("This api is only for POST", status=400)
 
 
-class CreateListModelMixin(object):
+# class CreateListModelMixin(object):
     
-	def get_serializer(self, *args, **kwargs):
-		if isinstance(kwargs.get('data',{}),list):
-			kwargs['many'] = True
-		return super(self).get_serializer(*args,**kwargs)
+# 	def get_serializer(self, *args, **kwargs):
+# 		if isinstance(kwargs.get('data',{}),list):
+# 			kwargs['many'] = True
+# 		return super(self).get_serializer(*args,**kwargs)
 
 
 
@@ -189,7 +208,6 @@ class BatteryTemperatureViewSet(viewsets.ModelViewSet):
 			return HttpResponse("created",status=201)
         
 		return HttpResponse(request.data,status=404)
-
 
 class DataViewSet(viewsets.ModelViewSet):
 
