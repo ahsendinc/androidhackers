@@ -1,6 +1,11 @@
 from django.contrib.auth.models import User,Group 
-from .models import GenericData, Data, BatteryStatus, BatteryHealth, BatteryLevel, BatteryTemperature, CPUTotal, CPUUser, CPUKernel, CPULoad1, CPULoad2, CPULoad3, CPUHog1, CPUHog2, CPUHog3, CPUHog4, CPUHog5, MemInfoUsedRam, MemInfoTotalRam, MemInfoFreeRam
+from .models import GenericData, Data, BatteryStatus, BatteryHealth, BatteryLevel, BatteryTemperature, CPUTotal, CPUUser, CPUKernel, CPULoad1, CPULoad2, CPULoad3, CPUHog1, CPUHog2, CPUHog3, CPUHog4, CPUHog5, MemInfoUsedRam, MemInfoTotalRam, MemInfoFreeRam, TestInfo
 from rest_framework import serializers
+
+class TestInfoSerializer(serializers.HyperlinkedModelSerializer):
+	class Meta:
+		model = TestInfo
+		fields = ('idnum','name','status','message')
 
 class BatteryLevelSerializer(serializers.HyperlinkedModelSerializer):
 	class Meta:

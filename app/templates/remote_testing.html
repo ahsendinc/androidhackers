@@ -141,12 +141,12 @@
                     <ul role="menu" class="dropdown-menu">
                       <li><a href="runbattery">1. Low Battery</a>
                       </li>
-                      <li><a href="#">2. Battery Status</a>
+                      <li><a href="runbatterystatus">2. Battery Status</a>
                       </li>
-                      <li><a href="#">3. Bluetooth</a>
+                      <li><a href="runbluetooth">3. Bluetooth</a>
                       </li>
                       <li></li>
-                      <li><a href="#">4. Speed</a>
+                      <li><a href="runspeed">4. Speed</a>
                       </li>
                     </ul>
                     </div> </li>
@@ -181,45 +181,18 @@
                         </thead>
 
                         <tbody>
+                        {% for test in query %}
                           <tr class="even pointer">
                             
-                            <td class=" ">1</td>
-                            <td class=" ">Low Battery</td>
-                            <td class="a-right a-right  ">Passed</td>
-                            <td class=" last">...</td>
+                            <td class=" ">{{test.idnum}}</td>
+                            <td class=" ">{{test.name}}</td>
+                            <td class="a-right a-right  ">{{test.status}}</td>
+                            <td class=" last">{{test.message}}</td>
                             
                             
                             </td>
                           </tr>
-                          <tr class="odd pointer">
-                            
-                            <td class=" ">2</td>
-                            <td class=" ">Battery Status</td>
-                            <td class="a-right a-right  ">Passed</td>
-                            <td class=" last">...</td>
-                           
-                            </td>
-                          </tr>
-                          <tr class="even pointer">
-                            
-                            </td>
-                            <td class=" ">3</td>
-                            <td class=" ">Bluetooth</td>
-                            <td class="a-right a-right  ">Pending</td>
-                            <td class=" last">...</td>
-                           
-                            </td>
-                          </tr>
-                          <tr class="odd pointer">
-                            
-                            </td>
-                             <td class=" ">4</td>
-                            <td class=" ">Speed</td>
-                            <td class="a-right a-right  ">Failed</td>
-                            <td class=" last">You're SOL</td>
-                            </td>
-                          </tr>
-                          
+                          {% endfor %}
                           
                         </tbody>
                       </table>

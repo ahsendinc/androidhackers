@@ -183,31 +183,31 @@ Morris.Donut({
             <!-- top tiles -->
             <!-- ============== TOP BAR WITH BATTERY HEALTH, STATUS, LEVEL, TEMP, ETC... -->
           <div class="row tile_count">
-            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
               <span class="count_top"><i class="fa fa-heart"></i> Battery Health</span>
-              <div class="count">Good</div>
+              <div class="count">{{lasthealth}}</div>
               
             </div>
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
               <span class="count_top"><i class="fa fa-cog"></i> Battery Status</span>
-              <div class="count">Full</div>
+              <div class="count">{{laststatus}}</div>
               
             </div>
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
               <span class="count_top"><i class="fa fa-bolt"></i> Battery Level</span>
-              <div class="count green">100%</div>
+              <div class="count green">{{lastlevel}}%</div>
             </div>
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
               <span class="count_top"><i class="fa fa-fire"></i> Battery Temperature</span>
-              <div class="count">35&#8451;</div>
+              <div class="count">{{lasttemperature}}&#8451;</div>
             </div>
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
               <span class="count_top"><i class="fa fa-user"></i> CPU Usage</span>
-              <div class="count">31%</div>
+              <div class="count">{{lastcpu}}%</div>
             </div>
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
               <span class="count_top"><i class="fa fa-archive"></i> Total Free RAM</span>
-              <div class="count">1.26GB</div>
+              <div class="count">{{lastram}}GB</div>
             </div>
           </div>
           <!-- ============== TOP BAR WITH BATTERY HEALTH, STATUS, LEVEL, TEMP, ETC... -->

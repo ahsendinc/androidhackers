@@ -24,6 +24,7 @@ from rest_framework.renderers import JSONRenderer
 
 from .serializers import CPUTotalSerializer, CPUUserSerializer, CPUKernelSerializer, CPULoad1Serializer, CPULoad2Serializer,CPULoad3Serializer, CPUHog1Serializer, CPUHog2Serializer, CPUHog3Serializer, CPUHog4Serializer, CPUHog5Serializer, MemInfoTotalRamSerializer, MemInfoFreeRamSerializer, MemInfoUsedRamSerializer
 from .models import TestInfo
+from .serializers import TestInfoSerializer
 # Create your views here.
 #@ensure_csrf_cookie
 def index(request):
@@ -50,39 +51,66 @@ def index(request):
 
 def indexcpu(request):
 	if (request.method == "GET"):
-		#data = request.GET.get('username')
-	# 	try:
-	# 		last = json.loads(GenericData.objects.all()[GenericData.objects.count()-1].jsondata)
-	# #return render(request, 'index.html', data)''
-
-	# 		return (HttpResponse("last field:" + last['field']))
-	# 		#return HttpResponse(json.dumps(last))
-	# 	except:
-	# 		return HttpResponse("Hello! You're at the Android Diagnosis index. No data to show yet or Exception happened.")
-		return render(request, 'cpu.html')
+		lasthealth = BatteryHealth.objects.all()[BatteryHealth.objects.count()-1].value
+		laststatus = BatteryStatus.objects.all()[BatteryStatus.objects.count()-1].value
+		lastlevel = BatteryLevel.objects.all()[BatteryLevel.objects.count()-1].value
+		lasttemperature = BatteryTemperature.objects.all()[BatteryTemperature.objects.count()-1].value
+		lastcpu = CPUTotal.objects.all()[CPUTotal.objects.count()-1].value
+		lastram = MemInfoFreeRam.objects.all()[MemInfoFreeRam.objects.count()-1].value
+		return render(request, 'cpu.html',{'lasthealth':lasthealth, 'laststatus':laststatus, 'lastlevel':lastlevel,'lasttemperature':lasttemperature,'lastcpu':lastcpu, 'lastram':lastram})
 	else:	
 	    return HttpResponse("Hello! You're at the Android Diagnosis index. Not allowed action.")
 
 def indexremotetest(request):
 	if (request.method == "GET"):
-		#data = request.GET.get('username')
-	# 	try:
-	# 		last = json.loads(GenericData.objects.all()[GenericData.objects.count()-1].jsondata)
-	# #return render(request, 'index.html', data)''
-
-	# 		return (HttpResponse("last field:" + last['field']))
-	# 		#return HttpResponse(json.dumps(last))
-	# 	except:
-	# 		return HttpResponse("Hello! You're at the Android Diagnosis index. No data to show yet or Exception happened.")
-		return render(request, 'remote_testing.html')
+		query = TestInfo.objects.all().order_by('-id')
+		return render(request, 'remote_testing.html',{"query":query})
 	else:	
 	    return HttpResponse("Hello! You're at the Android Diagnosis index. Not allowed action.")
+def gettestinfo(request):
+	if request.method == "GET":
+		test = TestInfo.objects.first()
+		myresponse = {"id": test.idnum , "name" : test.name }
+		return HttpResponse(json.dumps(myresponse))
+
+	else:
+		return HttpResponse("action not allowed.")
+@csrf_exempt
+@api_view(['POST'])
+def posttestinfo(request):
+	if request.method == "POST":
+		data = request.data
+		test = TestInfo.objects.filter(idnum=data["id"]).first()
+		test.status = data["status"]
+		test.message = data["message"]
+		test.save(update_fields=["status","message"])
+		return HttpResponse(test.message)
+	else:
+		return HttpResponse("nor allowed action")
 
 def runbattery(request):
 	if request.method == "GET":
-		test = TestInfo.objects.create(idnum=TestInfo.objects.count(), name = "Low Battery", status = "Pending", message="...")
+		test = TestInfo.objects.create(idnum=TestInfo.objects.count()+1, name = "Low Battery", status = "Pending", message="...")
 		test.save()
-		return HttpResponseRedirect("../test")
+		return HttpResponseRedirect("..")
+
+def runbatterystatus(request):
+	if request.method == "GET":
+		test = TestInfo.objects.create(idnum=TestInfo.objects.count()+1, name = "Battery Status", status = "Pending", message="...")
+		test.save()
+		return HttpResponseRedirect("..")
+
+def runbluetooth(request):
+	if request.method == "GET":
+		test = TestInfo.objects.create(idnum=TestInfo.objects.count()+1, name = "Bluetooth", status = "Pending", message="...")
+		test.save()
+		return HttpResponseRedirect("..")
+
+def runspeed(request):
+	if request.method == "GET":
+		test = TestInfo.objects.create(idnum=TestInfo.objects.count()+1, name = "Speed", status = "Pending", message="...")
+		test.save()
+		return HttpResponseRedirect("..")
 
 #@ensure_csrf_cookie
 @csrf_exempt
@@ -280,6 +308,9 @@ class BatteryStatusViewSet(viewsets.ModelViewSet):
 
 	# 	return HttpResponse(serializer)
 
+class TestInfoViewSet(viewsets.ModelViewSet):
+	queryset = TestInfo.objects.all()
+	serializer_class = TestInfoSerializer
 
 class BatteryHealthViewSet(viewsets.ModelViewSet):
 

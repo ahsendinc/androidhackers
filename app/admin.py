@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import GenericData
+from .models import GenericData, TestInfo
 # Register your models here.
 
 class GenericDataAdmin (admin.ModelAdmin):
@@ -7,4 +7,8 @@ class GenericDataAdmin (admin.ModelAdmin):
 	list_filter = ['pubdate']
 	search_fields = ['pubdate']
 
-admin.site.register(GenericData, GenericDataAdmin)
+class TestInfoAdmin (admin.ModelAdmin):
+	list_display = ('idnum', 'name', 'status', 'message')
+	list_filter = ['name','status']
+	search_fields = ['name','idnum','status']
+admin.site.register(TestInfo, TestInfoAdmin)

@@ -41,6 +41,7 @@ router.register(r'cpuhog5',views.CPUHog5ViewSet)
 router.register(r'meminfototalram',views.MemInfoTotalRamViewSet)
 router.register(r'meminfofreeram',views.MemInfoFreeRamViewSet)
 router.register(r'meminfousedram',views.MemInfoUsedRamViewSet)
+router.register(r'testinfo',views.TestInfoViewSet)
 # router = routers.SimpleRouter()
 # router.register('texts', TextAPIView, base_name='texts')
 
