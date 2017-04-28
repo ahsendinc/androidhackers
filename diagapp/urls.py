@@ -23,10 +23,17 @@ router.register(r'genericdata',views.GenericDataViewSet)
 router.register(r'users', views.UserViewSet)
 router.register(r'groups', views.GroupViewSet)
 router.register(r'data',views.DataViewSet)
+router.register(r'batteryhealth',views.BatteryHealthViewSet)
+router.register(r'batterylevel',views.BatteryLevelViewSet)
+router.register(r'batterystatus',views.BatteryStatusViewSet)
+router.register(r'batterytemperature',views.BatteryTemperatureViewSet)
+
+# router = routers.SimpleRouter()
+# router.register('texts', TextAPIView, base_name='texts')
 
 urlpatterns = [
 	url(r'^', include(router.urls)),
     url(r'^admin/', admin.site.urls),
-    url(r'^', include('app.urls')),
+    url(r'^app/', include('app.urls')),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]

@@ -18,15 +18,22 @@ class BatteryHealthSerializer(serializers.HyperlinkedModelSerializer):
 		fields = ('time','value')
 
 class BatteryStatusSerializer(serializers.HyperlinkedModelSerializer):
+	def __init__(self, *args, **kwargs):
+		many = kwargs.pop('many', True)
+		super(BatteryStatusSerializer, self).__init__(many=many, *args, **kwargs)
+
 	class Meta:
 		model = BatteryStatus
-		fields = ('time','value')
+		fields = ('value','time')
+
+
+
 
 class DataSerializer(serializers.HyperlinkedModelSerializer):
-	battery_status = BatteryStatusSerializer(many=True) 
-	battery_health = BatteryHealthSerializer(many=True)
-	battery_level = BatteryLevelSerializer(many=True)
-	battery_temperature = BatteryTemperatureSerializer(many=True)
+	# battery_status = BatteryStatusSerializer(many=True) 
+	# battery_health = BatteryHealthSerializer(many=True)
+	# battery_level = BatteryLevelSerializer(many=True)
+	# battery_temperature = BatteryTemperatureSerializer(many=True)
 	# cpu_total =  
 	# cpu_load1
 	# cpu_load2
@@ -40,12 +47,12 @@ class DataSerializer(serializers.HyperlinkedModelSerializer):
 
 	class Meta:
 		model = Data
-		fields = ('pubdate', 'battery_status', 'battery_health', 'battery_level', 'battery_temperature')
+		fields = ('pubdate',)
 
 	def create(self, validated_data):
-		batterystatus_datas = validated_data.pop('battery_status')
-		batteryhealth_datas = validated_data.pop('battery_health')
-		batterylevel_datas = validated_data.pop('battery_level')
+		batterystatus_datas = validated_data.pop('batterystatus')
+		batteryhealth_datas = validated_data.pop('batteryhealth')
+		batterylevel_datas = validated_data.pop('batterylevel')
 		batterytemperature_datas = validated_data.pop('battery_temperature')
 		data = Data.objects.create(**validated_data)
 		for batterystatus_data in batterystatus_datas:

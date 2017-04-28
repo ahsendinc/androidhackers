@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'app',
     'rest_framework',
+    'drf_multiple_model',
 ]
 REST_FRAMEWORK = {
     #'DEFAULT_PERMISSION_CLASSES':('rest_framework.permissions.IsAdminUser',),

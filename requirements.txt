@@ -3,6 +3,7 @@ Django==1.10.2
 Markdown==2.6.7
 amqp==2.1.4
 billiard==3.5.0.2
+boto==2.43.0
 celery==4.0.2
 cheroot==5.1.0
 configparser==3.5.0
@@ -10,7 +11,11 @@ dj-database-url==0.4.1
 django-cleanup==0.4.2
 django-database-storage==0.1.2
 django-filter==0.15.3
+django-fitbit==0.3.0
+django-picklefield==0.3.2
+django-rest-multiple-models==1.8.2
 djangorestframework==3.5.3
+fitbit==0.3.0
 gunicorn==19.6.0
 kombu==4.0.2
 numpy==1.11.2
