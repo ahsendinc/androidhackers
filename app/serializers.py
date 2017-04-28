@@ -13,6 +13,7 @@ class BatteryTemperatureSerializer(serializers.HyperlinkedModelSerializer):
 		fields = ('time','value')
 
 class BatteryHealthSerializer(serializers.HyperlinkedModelSerializer):
+	
 	class Meta:
 		model = BatteryHealth
 		fields = ('time','value')

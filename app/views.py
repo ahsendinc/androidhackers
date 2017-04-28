@@ -132,15 +132,63 @@ class BatteryHealthViewSet(viewsets.ModelViewSet):
 	queryset = BatteryHealth.objects.all()
 	serializer_class= BatteryHealthSerializer
 
+	def create(self, request, *args, **kwargs):
+		try:
+			listOfThings = request.data['battery_health']
+			mylist = json.loads(listOfThings)
+			print(listOfThings)
+			serializer = self.get_serializer(data=mylist, many= True)
+		except KeyError:
+			mylist = request.data
+			serializer = self.get_serializer(data=mylist)
+
+		if serializer.is_valid():
+			serializer.save()
+			return HttpResponse("created",status=201)
+        
+		return HttpResponse(request.data,status=404)
+
 class BatteryLevelViewSet(viewsets.ModelViewSet):
 
 	queryset = BatteryLevel.objects.all()
 	serializer_class= BatteryLevelSerializer
 
+	def create(self, request, *args, **kwargs):
+		try:
+			listOfThings = request.data['battery_level']
+			mylist = json.loads(listOfThings)
+			print(listOfThings)
+			serializer = self.get_serializer(data=mylist, many= True)
+		except KeyError:
+			mylist = request.data
+			serializer = self.get_serializer(data=mylist)
+
+		if serializer.is_valid():
+			serializer.save()
+			return HttpResponse("created",status=201)
+        
+		return HttpResponse(request.data,status=404)
+
 class BatteryTemperatureViewSet(viewsets.ModelViewSet):
 
 	queryset = BatteryTemperature.objects.all()
 	serializer_class= BatteryTemperatureSerializer
+
+	def create(self, request, *args, **kwargs):
+		try:
+			listOfThings = request.data['battery_temperature']
+			mylist = json.loads(listOfThings)
+			print(listOfThings)
+			serializer = self.get_serializer(data=mylist, many= True)
+		except KeyError:
+			mylist = request.data
+			serializer = self.get_serializer(data=mylist)
+
+		if serializer.is_valid():
+			serializer.save()
+			return HttpResponse("created",status=201)
+        
+		return HttpResponse(request.data,status=404)
 
 
 class DataViewSet(viewsets.ModelViewSet):
