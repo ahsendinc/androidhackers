@@ -94,7 +94,7 @@ def indexcontacts(request):
 
 def gettestinfo(request):
 	if request.method == "GET":
-		test = TestInfo.objects.first()
+		test = TestInfo.objects.filter(status="Pending").first()
 		myresponse = {"id": test.idnum , "name" : test.name }
 		return HttpResponse(json.dumps(myresponse))
 
