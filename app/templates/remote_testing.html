@@ -186,7 +186,15 @@
                             
                             <td class=" ">{{test.idnum}}</td>
                             <td class=" ">{{test.name}}</td>
+                            {% if test.status == "Passed" or test.status == "passed"  or test.status == "Pass" or test.status == "pass"%}
+                            <td class="a-right a-right  ", style="color:green;">{{test.status}}</td>
+                            {% else %}
+                            {% if test.status == "Failed" or test.status == "failed" or test.status == "Fail" or test.status == "fail" %}
+                             <td class="a-right a-right  ", style="color:red;">{{test.status}}</td>
+                            {% else %}
                             <td class="a-right a-right  ">{{test.status}}</td>
+                            {% endif %}
+                            {% endif %}
                             <td class=" last">{{test.message}}</td>
                             
                             
