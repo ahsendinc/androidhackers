@@ -48,7 +48,7 @@ def index(request):
 	# 		#return HttpResponse(json.dumps(last))
 	# 	except:
 	# 		return HttpResponse("Hello! You're at the Android Diagnosis index. No data to show yet or Exception happened.")
-		return render(request, 'battery.html', {'lasthealth':lasthealth, 'laststatus':laststatus, 'lastlevel':lastlevel,'lasttemperature':lasttemperature/10,'lastcpu':lastcpu, 'lastram':lastram/1000000, 'allbatterylevel':allbatterylevel})
+		return render(request, 'battery.html', {'lasthealth':lasthealth, 'laststatus':laststatus, 'lastlevel':lastlevel,'lasttemperature':lasttemperature/10,'lastcpu':lastcpu, 'lastram':lastram/1000, 'allbatterylevel':allbatterylevel})
 	else:	
 	    return HttpResponse("Hello! You're at the Android Diagnosis index. Not allowed action.")
 	   # context = {'foo': 'bar'}
@@ -63,7 +63,7 @@ def indexcpu(request):
 		lasttemperature = BatteryTemperature.objects.all()[BatteryTemperature.objects.count()-1].value
 		lastcpu = CPUTotal.objects.all()[CPUTotal.objects.count()-1].value
 		lastram = MemInfoFreeRam.objects.all()[MemInfoFreeRam.objects.count()-1].value
-		return render(request, 'cpu.html',{'lasthealth':lasthealth, 'laststatus':laststatus, 'lastlevel':lastlevel,'lasttemperature':lasttemperature,'lastcpu':lastcpu, 'lastram':lastram})
+		return render(request, 'cpu.html',{'lasthealth':lasthealth, 'laststatus':laststatus, 'lastlevel':lastlevel,'lasttemperature':lasttemperature/10,'lastcpu':lastcpu, 'lastram':lastram/1000})
 	else:	
 	    return HttpResponse("Hello! You're at the Android Diagnosis index. Not allowed action.")
 
