@@ -73,8 +73,8 @@ def indexcpu(request):
 		lastramtotal = MemInfoTotalRam.objects.all()[MemInfoTotalRam.objects.count()-1].value
 		lastramused = MemInfoUsedRam.objects.all()[MemInfoUsedRam.objects.count()-1].value
 
-		ramfree_percent = lastramfree/lastramtotal *100
-		ramused_percent = lastramused/lastramtotal *100
+		ramfree_percent = (lastramfree/lastramtotal)*100
+		ramused_percent = (lastramused/lastramtotal)*100
 
 		return render(request, 'cpu.html',{'lasthealth':lasthealth, 'laststatus':laststatus, 'lastlevel':lastlevel,'lasttemperature':lasttemperature/10,'lastcpu':lastcpu, 'lastram':lastramfree/1000, 'cpuhog1':lastcpuhog1, 'cpuhog2':lastcpuhog2, 'cpuhog3':lastcpuhog3, 'cpuhog4':lastcpuhog4, 'cpuhog5':lastcpuhog5, 'lastramfree':lastramfree, 'lastramused':lastramused, 'lastramtotal':lastramtotal, 'ramfree_percent':ramfree_percent, 'ramused_percent':ramused_percent})
 	else:	
