@@ -3,7 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.template import RequestContext
 from django.views.decorators.csrf import ensure_csrf_cookie
-from .models import GenericData, Data, BatteryStatus, BatteryHealth, BatteryLevel, BatteryTemperature, CPUTotal, CPUUser, CPUKernel, CPULoad1, CPULoad2, CPULoad3, CPUHog1, CPUHog2, CPUHog3, CPUHog4, CPUHog5, MemInfoTotalRam, MemInfoFreeRam, MemInfoUsedRam
+from .models import GenericData, Data, BatteryStatus, BatteryHealth, BatteryLevel, BatteryTemperature, CPUTotal, CPUUser, CPUKernel, CPULoad1, CPULoad2, CPULoad3, CPUHog1New, CPUHog2New, CPUHog3New, CPUHog4New, CPUHog5New, MemInfoTotalRam, MemInfoFreeRam, MemInfoUsedRam
 from rest_framework import viewsets
 from .serializers import GenericDataSerializer, UserSerializer, GroupSerializer, DataSerializer
 from .serializers import BatteryStatusSerializer, BatteryHealthSerializer, BatteryLevelSerializer, BatteryTemperatureSerializer,MultBatteryStatusSerializer
@@ -64,11 +64,11 @@ def indexcpu(request):
 		lasttemperature = BatteryTemperature.objects.all()[BatteryTemperature.objects.count()-1].value
 		lastcpu = CPUTotal.objects.all()[CPUTotal.objects.count()-1].value
 		
-		lastcpuhog1 = CPUHog1.objects.all()[CPUHog1.objects.count()-1]
-		lastcpuhog2 = CPUHog2.objects.all()[CPUHog2.objects.count()-1]
-		lastcpuhog3 = CPUHog3.objects.all()[CPUHog3.objects.count()-1]
-		lastcpuhog4 = CPUHog4.objects.all()[CPUHog4.objects.count()-1]
-		lastcpuhog5 = CPUHog5.objects.all()[CPUHog5.objects.count()-1]
+		lastcpuhog1 = CPUHog1New.objects.all()[CPUHog1New.objects.count()-1]
+		lastcpuhog2 = CPUHog2New.objects.all()[CPUHog2New.objects.count()-1]
+		lastcpuhog3 = CPUHog3New.objects.all()[CPUHog3New.objects.count()-1]
+		lastcpuhog4 = CPUHog4New.objects.all()[CPUHog4New.objects.count()-1]
+		lastcpuhog5 = CPUHog5New.objects.all()[CPUHog5New.objects.count()-1]
 
 		lastramfree = MemInfoFreeRam.objects.all()[MemInfoFreeRam.objects.count()-1].value
 		lastramtotal = MemInfoTotalRam.objects.all()[MemInfoTotalRam.objects.count()-1].value
@@ -548,7 +548,7 @@ class CPULoad3ViewSet(viewsets.ModelViewSet):
 
 class CPUHog1ViewSet(viewsets.ModelViewSet):
 
-	queryset = CPUHog1.objects.all()
+	queryset = CPUHog1New.objects.all()
 	serializer_class= CPUHog1Serializer
 
 	def create(self, request, *args, **kwargs):
@@ -569,7 +569,7 @@ class CPUHog1ViewSet(viewsets.ModelViewSet):
 
 class CPUHog2ViewSet(viewsets.ModelViewSet):
 
-	queryset = CPUHog2.objects.all()
+	queryset = CPUHog2New.objects.all()
 	serializer_class= CPUHog2Serializer
 
 	def create(self, request, *args, **kwargs):
@@ -590,7 +590,7 @@ class CPUHog2ViewSet(viewsets.ModelViewSet):
 
 class CPUHog3ViewSet(viewsets.ModelViewSet):
 
-	queryset = CPUHog3.objects.all()
+	queryset = CPUHog3New.objects.all()
 	serializer_class= CPUHog3Serializer
 
 	def create(self, request, *args, **kwargs):
@@ -611,7 +611,7 @@ class CPUHog3ViewSet(viewsets.ModelViewSet):
 
 class CPUHog4ViewSet(viewsets.ModelViewSet):
 
-	queryset = CPUHog4.objects.all()
+	queryset = CPUHog4New.objects.all()
 	serializer_class= CPUHog4Serializer
 
 	def create(self, request, *args, **kwargs):
@@ -632,7 +632,7 @@ class CPUHog4ViewSet(viewsets.ModelViewSet):
 
 class CPUHog5ViewSet(viewsets.ModelViewSet):
 
-	queryset = CPUHog5.objects.all()
+	queryset = CPUHog5New.objects.all()
 	serializer_class= CPUHog5Serializer
 
 	def create(self, request, *args, **kwargs):

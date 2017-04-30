@@ -68,6 +68,33 @@ class CPUHog5(models.Model):
 	value = models.IntegerField()
 	name = models.CharField(max_length=1000)
 
+#New models for CPUHog with decimal
+
+class CPUHog1New(models.Model):
+	time = models.DateTimeField()
+	value = models.DecimalField(max_digits=6, decimal_places=2)
+	name = models.CharField(max_length=1000)
+
+class CPUHog2New(models.Model):
+	time = models.DateTimeField()
+	value = models.DecimalField(max_digits=6, decimal_places=2)
+	name = models.CharField(max_length=1000)
+
+class CPUHog3New(models.Model):
+	time = models.DateTimeField()
+	value = models.DecimalField(max_digits=6, decimal_places=2)
+	name = models.CharField(max_length=1000)
+
+class CPUHog4New(models.Model):
+	time = models.DateTimeField()
+	value = models.DecimalField(max_digits=6, decimal_places=2)
+	name = models.CharField(max_length=1000)
+
+class CPUHog5New(models.Model):
+	time = models.DateTimeField()
+	value = models.DecimalField(max_digits=6, decimal_places=2)
+	name = models.CharField(max_length=1000)
+
 class MemInfoTotalRam(models.Model):
 	time = models.DateTimeField()
 	value = models.IntegerField()

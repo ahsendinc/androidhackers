@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User,Group 
-from .models import GenericData, Data, BatteryStatus, BatteryHealth, BatteryLevel, BatteryTemperature, CPUTotal, CPUUser, CPUKernel, CPULoad1, CPULoad2, CPULoad3, CPUHog1, CPUHog2, CPUHog3, CPUHog4, CPUHog5, MemInfoUsedRam, MemInfoTotalRam, MemInfoFreeRam, TestInfo
+from .models import GenericData, Data, BatteryStatus, BatteryHealth, BatteryLevel, BatteryTemperature, CPUTotal, CPUUser, CPUKernel, CPULoad1, CPULoad2, CPULoad3, CPUHog1New, CPUHog2New, CPUHog3New, CPUHog4New, CPUHog5New, MemInfoUsedRam, MemInfoTotalRam, MemInfoFreeRam, TestInfo
 from rest_framework import serializers
 
 class TestInfoSerializer(serializers.HyperlinkedModelSerializer):
@@ -71,31 +71,31 @@ class CPULoad3Serializer(serializers.HyperlinkedModelSerializer):
 class CPUHog1Serializer(serializers.HyperlinkedModelSerializer):
 
 	class Meta:
-		model = CPUHog1
+		model = CPUHog1New
 		fields = ('time','value','name')
 
 class CPUHog2Serializer(serializers.HyperlinkedModelSerializer):
 
 	class Meta:
-		model = CPUHog2
+		model = CPUHog2New
 		fields = ('time','value','name')
 
 class CPUHog3Serializer(serializers.HyperlinkedModelSerializer):
 
 	class Meta:
-		model = CPUHog3
+		model = CPUHog3New
 		fields = ('time','value','name')
 
 class CPUHog4Serializer(serializers.HyperlinkedModelSerializer):
 
 	class Meta:
-		model = CPUHog4
+		model = CPUHog4New
 		fields = ('time','value','name')
 
 class CPUHog5Serializer(serializers.HyperlinkedModelSerializer):
 
 	class Meta:
-		model = CPUHog5
+		model = CPUHog5New
 		fields = ('time','value','name')
 
 class MemInfoTotalRamSerializer(serializers.HyperlinkedModelSerializer):
