@@ -63,7 +63,14 @@ def indexcpu(request):
 		lasttemperature = BatteryTemperature.objects.all()[BatteryTemperature.objects.count()-1].value
 		lastcpu = CPUTotal.objects.all()[CPUTotal.objects.count()-1].value
 		lastram = MemInfoFreeRam.objects.all()[MemInfoFreeRam.objects.count()-1].value
-		return render(request, 'cpu.html',{'lasthealth':lasthealth, 'laststatus':laststatus, 'lastlevel':lastlevel,'lasttemperature':lasttemperature/10,'lastcpu':lastcpu, 'lastram':lastram/1000})
+
+		lastcpuhog1 = CPUHog1.objects.all()[CPUHog1.objects.count()-1]
+		lastcpuhog2 = CPUHog2.objects.all()[CPUHog2.objects.count()-1]
+		lastcpuhog3 = CPUHog3.objects.all()[CPUHog3.objects.count()-1]
+		lastcpuhog4 = CPUHog4.objects.all()[CPUHog4.objects.count()-1]
+		lastcpuhog5 = CPUHog5.objects.all()[CPUHog5.objects.count()-1]
+
+		return render(request, 'cpu.html',{'lasthealth':lasthealth, 'laststatus':laststatus, 'lastlevel':lastlevel,'lasttemperature':lasttemperature/10,'lastcpu':lastcpu, 'lastram':lastram/1000, 'cpuhog1':lastcpuhog1, 'cpuhog2':lastcpuhog2, 'cpuhog3':lastcpuhog3, 'cpuhog4':lastcpuhog4, 'cpuhog5':lastcpuhog5})
 	else:	
 	    return HttpResponse("Hello! You're at the Android Diagnosis index. Not allowed action.")
 
@@ -95,8 +102,13 @@ def indexcontacts(request):
 def gettestinfo(request):
 	if request.method == "GET":
 		test = TestInfo.objects.filter(status="Pending").first()
-		myresponse = {"id": test.idnum , "name" : test.name }
-		return HttpResponse(json.dumps(myresponse))
+		try:
+			myresponse = {"id": test.idnum , "name" : test.name }
+			return HttpResponse(json.dumps(myresponse))
+		
+		except Exception:
+			myresponse = {"id": -1, "name": "not pending"}
+			return HttpResponse(json.dumps(myresponse))
 
 	else:
 		return HttpResponse("action not allowed.")
@@ -111,7 +123,7 @@ def posttestinfo(request):
 		test.save(update_fields=["status","message"])
 		return HttpResponse(test.message)
 	else:
-		return HttpResponse("nor allowed action")
+		return HttpResponse("not allowed action")
 
 def runbattery(request):
 	if request.method == "GET":
