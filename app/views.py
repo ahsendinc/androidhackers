@@ -62,15 +62,21 @@ def indexcpu(request):
 		lastlevel = BatteryLevel.objects.all()[BatteryLevel.objects.count()-1].value
 		lasttemperature = BatteryTemperature.objects.all()[BatteryTemperature.objects.count()-1].value
 		lastcpu = CPUTotal.objects.all()[CPUTotal.objects.count()-1].value
-		lastram = MemInfoFreeRam.objects.all()[MemInfoFreeRam.objects.count()-1].value
-
+		
 		lastcpuhog1 = CPUHog1.objects.all()[CPUHog1.objects.count()-1]
 		lastcpuhog2 = CPUHog2.objects.all()[CPUHog2.objects.count()-1]
 		lastcpuhog3 = CPUHog3.objects.all()[CPUHog3.objects.count()-1]
 		lastcpuhog4 = CPUHog4.objects.all()[CPUHog4.objects.count()-1]
 		lastcpuhog5 = CPUHog5.objects.all()[CPUHog5.objects.count()-1]
 
-		return render(request, 'cpu.html',{'lasthealth':lasthealth, 'laststatus':laststatus, 'lastlevel':lastlevel,'lasttemperature':lasttemperature/10,'lastcpu':lastcpu, 'lastram':lastram/1000, 'cpuhog1':lastcpuhog1, 'cpuhog2':lastcpuhog2, 'cpuhog3':lastcpuhog3, 'cpuhog4':lastcpuhog4, 'cpuhog5':lastcpuhog5})
+		lastramfree = MemInfoFreeRam.objects.all()[MemInfoFreeRam.objects.count()-1].value
+		lastramtotal = MemInfoTotalRam.objects.all()[MemInfoTotalRam.objects.count()-1].value
+		lastramused = MemInfoUsedRam.objects.all()[MemInfoUsedRam.objects.count()-1].value
+
+		ramfree_percent = lastramfree/lastramtotal *100
+		ramused_percent = lastramused/lastramtotal *100
+
+		return render(request, 'cpu.html',{'lasthealth':lasthealth, 'laststatus':laststatus, 'lastlevel':lastlevel,'lasttemperature':lasttemperature/10,'lastcpu':lastcpu, 'lastram':lastramfree/1000, 'cpuhog1':lastcpuhog1, 'cpuhog2':lastcpuhog2, 'cpuhog3':lastcpuhog3, 'cpuhog4':lastcpuhog4, 'cpuhog5':lastcpuhog5, 'lastramfree':lastramfree, 'lastramused':lastramused, 'lastramtotal':lastramtotal, 'ramfree_percent':ramfree_percent, 'ramused_percent':ramused_percent})
 	else:	
 	    return HttpResponse("Hello! You're at the Android Diagnosis index. Not allowed action.")
 

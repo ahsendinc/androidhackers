@@ -188,7 +188,7 @@
                           <li class="media event">
                             
                             <div class="media-body">
-                              <a class="title" href="#">{{cpuhog1.name}}}</a>
+                              <a class="title" href="#">{{cpuhog1.name}}</a>
                               <p><strong>{{cpuhog1.value}}</strong> </p>
                               
                             </div>
@@ -196,41 +196,32 @@
                           <li class="media event">
                            
                             <div class="media-body">
-                              <a class="title" href="#">surfaceflinger</a>
-                              <p><strong>18%</strong> </p>
+                              <a class="title" href="#">{{cpuhog2.name}}</a>
+                              <p><strong>{{cpuhog2.value}}</strong> </p>
                               
                             </div>
                           </li>
                           <li class="media event">
                             
                             <div class="media-body">
-                              <a class="title" href="#">kswapd0</a>
-                              <p><strong>10%</strong> </p>
+                              <a class="title" href="#">{{cpuhog3.name}}</a>
+                              <p><strong>{{cpuhog3.value}}</strong> </p>
                             </div>
                           </li>
 
                            <li class="media event">
                             
                             <div class="media-body">
-                              <a class="title" href="#">mediaserver</a>
-                              <p><strong>9.7%</strong> </p>
+                              <a class="title" href="#">{{cpuhog4.name}}</a>
+                              <p><strong>{{cpuhog4.value}}</strong> </p>
                               
                             </div>
                           </li>
                           <li class="media event">
                             
                             <div class="media-body">
-                              <a class="title" href="#">com.google.android.youtube</a>
-                              <p><strong>6.1%</strong> </p>
-                              
-                            </div>
-                          </li>
-
-                          <li class="media event">
-                            
-                            <div class="media-body">
-                              <a class="title" href="#">com.sec.android.inputmethod</a>
-                              <p><strong>5.4%</strong> </p>
+                              <a class="title" href="#">{{cpuhog5.name}}</a>
+                              <p><strong>{{cpuhog5.value}}</strong> </p>
                               
                             </div>
                           </li>
@@ -329,19 +320,19 @@
                       <tbody>
                         <tr>
                           <th scope="row">Free RAM</th>
-                          <td>1269227</td>
-                          <td> 52% </th>
+                          <td>{{lastramfree}}</td>
+                          <td> {{ramfree_percent}} </th>
                           
                         </tr>
                         <tr>
                           <th scope="row">Used RAM</th>
-                          <td>1473393</td>
-                          <td> 48% </th>
+                          <td>{{lastramused}}</td>
+                          <td> {{ramused_percent}} </th>
                           
                         </tr>
                         <tr>
                           <th scope="row">Total RAM</th>
-                          <td>2742620</td>
+                          <td>{{lsatramtotal}}</td>
                           <td> - </th>
                           
                         </tr>
@@ -455,8 +446,8 @@ Morris.Bar({
 Morris.Donut({
   element: 'RAM',
   data: [
-    {value: 48, label: 'Free RAM', formatted:"" },
-    {value: 52, label: 'Used Ram', formatted: "" },
+    {value: {{ramfree_percent}}, label: 'Free RAM', formatted:"" },
+    {value: {{ramused_percent}}, label: 'Used Ram', formatted: "" },
     
   ],
   formatter: function (x, data) { return data.value + "%"; }
