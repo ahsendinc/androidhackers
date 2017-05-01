@@ -64,7 +64,7 @@ def index(request):
 		for data in btempdatas:
 			info = {
 				"time" : str(data.time),
-				"value" : data.value
+				"value" : data.value/10
 			}
 			contentTemp.append(info)
 
