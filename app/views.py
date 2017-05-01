@@ -77,8 +77,12 @@ def indexcpu(request):
 		ramfree_percent = round((lastramfree/float(lastramtotal))*100, 2)
 		ramused_percent = round((lastramused/float(lastramtotal))*100, 2)
 
+		lastload1 = CPULoad1.objects.all()[CPULoad1.objects.count()-1].value
+		lastload2 = CPULoad2.objects.all()[CPULoad2.objects.count()-1].value
+		lastload3 = CPULoad3.objects.all()[CPULoad3.objects.count()-1].value
 
-		return render(request, 'cpu.html',{'lasthealth':lasthealth, 'laststatus':laststatus, 'lastlevel':lastlevel,'lasttemperature':lasttemperature/10,'lastcpu':lastcpu, 'lastram':lastramfree/1000, 'cpuhog1':lastcpuhog1, 'cpuhog2':lastcpuhog2, 'cpuhog3':lastcpuhog3, 'cpuhog4':lastcpuhog4, 'cpuhog5':lastcpuhog5, 'lastramfree':lastramfree, 'lastramused':lastramused, 'lastramtotal':lastramtotal, 'ramfree_percent':ramfree_percent, 'ramused_percent':ramused_percent})
+
+		return render(request, 'cpu.html',{'lasthealth':lasthealth, 'laststatus':laststatus, 'lastlevel':lastlevel,'lasttemperature':lasttemperature/10,'lastcpu':lastcpu, 'lastram':lastramfree/1000, 'cpuhog1':lastcpuhog1, 'cpuhog2':lastcpuhog2, 'cpuhog3':lastcpuhog3, 'cpuhog4':lastcpuhog4, 'cpuhog5':lastcpuhog5, 'lastramfree':lastramfree, 'lastramused':lastramused, 'lastramtotal':lastramtotal, 'ramfree_percent':ramfree_percent, 'ramused_percent':ramused_percent, 'lastload1':lastload1, 'lastload2':lastload2, 'lastload3':lastload3})
 	else:	
 	    return HttpResponse("Hello! You're at the Android Diagnosis index. Not allowed action.")
 
