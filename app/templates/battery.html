@@ -440,10 +440,11 @@
     <script src="{% static 'js/morris.min.js' %}"></script>
 
      <script src="{% static 'js/morris.js' %}"></script>
+
  {% autoescape off %}
      <script type="text/javascript">
   $(function () {
-    var timestamp_data = {{contenLevel}};
+    var timestamp_data = {{contentLevel}};
 Morris.Line({
   element: 'battery_level',
   data: timestamp_data,
@@ -453,6 +454,7 @@ Morris.Line({
                   return value + '%'; 
                 },
   labels: ['battery value'],
+  pointSize: 2,
   dateFormat: function (x) { return new Date(x).toDateString(); }
 });
 });
@@ -472,6 +474,7 @@ Morris.Line({
   data: timestamp_data,
   xkey: 'time',
   ykeys: ['value'],
+  pointSize: 2,
   yLabelFormat: function(value) {
                   return value + 'C'; 
                 },
