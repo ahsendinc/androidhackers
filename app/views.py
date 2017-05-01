@@ -26,6 +26,7 @@ from .serializers import CPUTotalSerializer, CPUUserSerializer, CPUKernelSeriali
 from .models import TestInfo
 from .serializers import TestInfoSerializer
 import datetime
+import calendar
 # Create your views here.
 #@ensure_csrf_cookie
 def index(request):
@@ -89,7 +90,7 @@ def indexcpu(request):
 		content = []
 		for data in cpudatas:
 			info = {
-				"time" : data.time.timestamp(),
+				"time" : str(data.time),
 				"value" : data.value
 			}
 			content.append(info)
