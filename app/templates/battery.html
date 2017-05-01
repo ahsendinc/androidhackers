@@ -440,15 +440,10 @@
     <script src="{% static 'js/morris.min.js' %}"></script>
 
      <script src="{% static 'js/morris.js' %}"></script>
-
+ {% autoescape off %}
      <script type="text/javascript">
   $(function () {
-    var timestamp_data = [
-  {"time": 1349046000000, "value": 100},
-  {"time": 1313103600000, "value": 43},
-  {"time": 1299110400000, "value": 23},
-  {"time": 1281222000000, "value": 65},
-];
+    var timestamp_data = {{contenLevel}};
 Morris.Line({
   element: 'battery_level',
   data: timestamp_data,
@@ -462,20 +457,16 @@ Morris.Line({
 });
 });
   </script>
+   {% endautoescape %}
 <!-- ======== Battery % Level Chart ========== -->
 
 
 
-
+ {% autoescape off %}
 <!-- ======== Temperature Chart ========== -->
 <script type="text/javascript">
   $(function () {
-    var timestamp_data = [
-  {"time": 1349046000000, "value": 25},
-  {"time": 1313103600000, "value": 35},
-  {"time": 1299110400000, "value": 37},
-
-];
+    var timestamp_data = {{contentTemp}};
 Morris.Line({
   element: 'temperature',
   data: timestamp_data,
@@ -489,6 +480,6 @@ Morris.Line({
 });
 });
   </script>
-	
+	 {% endautoescape %}
   </body>
 </html>

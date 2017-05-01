@@ -42,6 +42,32 @@ def index(request):
 
 		allbatterylevel = BatteryLevel.objects.all()
 
+
+		date_from = datetime.datetime.now() - datetime.timedelta(days=1)
+		bleveldatas = BatteryLevel.objects.filter(time__gte=date_from)
+
+		info = {}
+		contentLevel = []
+		for data in bleveldatas:
+			info = {
+				"time" : str(data.time),
+				"value" : data.value
+			}
+			contentLevel.append(info)
+
+
+		date_from = datetime.datetime.now() - datetime.timedelta(days=1)
+		btempdatas = BatteryTemperature.objects.filter(time__gte=date_from)
+
+		info = {}
+		contentTemp = []
+		for data in btempdatas:
+			info = {
+				"time" : str(data.time),
+				"value" : data.value
+			}
+			contentTemp.append(info)
+
 		#for battery_level in allbatterylevel:
 
 	# #return render(request, 'index.html', data)''
@@ -50,7 +76,7 @@ def index(request):
 	# 		#return HttpResponse(json.dumps(last))
 	# 	except:
 	# 		return HttpResponse("Hello! You're at the Android Diagnosis index. No data to show yet or Exception happened.")
-		return render(request, 'battery.html', {'lasthealth':lasthealth, 'laststatus':laststatus, 'lastlevel':lastlevel,'lasttemperature':lasttemperature/10,'lastcpu':lastcpu, 'lastram':lastram/1000, 'allbatterylevel':allbatterylevel})
+		return render(request, 'battery.html', {'lasthealth':lasthealth, 'laststatus':laststatus, 'lastlevel':lastlevel,'lasttemperature':lasttemperature/10,'lastcpu':lastcpu, 'lastram':lastram/1000, 'allbatterylevel':allbatterylevel, 'contentLevel':contentLevel, 'contentTemp':contentTemp})
 	else:	
 	    return HttpResponse("Hello! You're at the Android Diagnosis index. Not allowed action.")
 	   # context = {'foo': 'bar'}
