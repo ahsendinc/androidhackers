@@ -82,6 +82,8 @@ def indexcpu(request):
 		lastload3 = CPULoad3.objects.all()[CPULoad3.objects.count()-1].value
 
 
+		daycpuquery = CPUTotal.objects.filter()
+
 		return render(request, 'cpu.html',{'lasthealth':lasthealth, 'laststatus':laststatus, 'lastlevel':lastlevel,'lasttemperature':lasttemperature/10,'lastcpu':lastcpu, 'lastram':lastramfree/1000, 'cpuhog1':lastcpuhog1, 'cpuhog2':lastcpuhog2, 'cpuhog3':lastcpuhog3, 'cpuhog4':lastcpuhog4, 'cpuhog5':lastcpuhog5, 'lastramfree':lastramfree, 'lastramused':lastramused, 'lastramtotal':lastramtotal, 'ramfree_percent':ramfree_percent, 'ramused_percent':ramused_percent, 'lastload1':lastload1, 'lastload2':lastload2, 'lastload3':lastload3})
 	else:	
 	    return HttpResponse("Hello! You're at the Android Diagnosis index. Not allowed action.")
@@ -124,6 +126,7 @@ def gettestinfo(request):
 
 	else:
 		return HttpResponse("action not allowed.")
+
 @csrf_exempt
 @api_view(['POST'])
 def posttestinfo(request):
@@ -137,9 +140,11 @@ def posttestinfo(request):
 	else:
 		return HttpResponse("not allowed action")
 
+##UPLOAD BATTERY TEST buna cevir test name i 
+
 def runbattery(request):
 	if request.method == "GET":
-		test = TestInfo.objects.create(idnum=TestInfo.objects.count()+1, name = "Low Battery", status = "Pending", message="...")
+		test = TestInfo.objects.create(idnum=TestInfo.objects.count()+1, name = "Upload Battery Test", status = "Pending", message="...")
 		test.save()
 		return HttpResponseRedirect("..")
 

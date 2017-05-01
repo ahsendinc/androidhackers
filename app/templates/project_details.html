@@ -157,7 +157,7 @@
                           <div class="panel-body">
                             <p>
                             </p>
-                            It is good practice to test software in extreme conditions, but it is generally undesirable to actually cause these conditions. We can mimic these types of situations (low battery, high temerature, etc.). We test that certain conditions cause different behavior for our program. For example, in low battery situations we send debug data less frequently and we test that it acutally does. We display whether these tests pass/fail for our application.
+                            It is good practice to test software in extreme conditions, but it is generally undesirable to actually cause these conditions. We can mimic these types of situations (low battery, high temperature, etc.). We test that certain conditions cause different behavior for our program. For example, in low battery situations we want to send debug information less frequently. We implemented a test- Upload Battery Test, that checks whether or not this is actually the case. This test sets the battery level to high and low, and checks to make sure that the alarm manager is sending data at the appropriate times. When the phone has low battery under 20%, debug data is sent every 10 minutes. 
                           </div>
                         </div>
                       </div>
