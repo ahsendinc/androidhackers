@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Android Hackers</title>
+    <title>Android Hackers - CPU</title>
 
     {% load staticfiles %}
     <!-- Bootstrap -->
@@ -388,24 +388,17 @@
       <link rel="stylesheet" href="{% static 'css/morris.css' %}">
     
     <!-- ============ CPU Total Chart ============= -->
+    {% autoescape off %}
 <script type="text/javascript">
   $(function () {
-    var timestamp_data = [
-  {"period": 1349046000000, "value": 25},
-  {"period": 1313103600000, "value": 54},
-  {"period": 1299110400000, "value": 90},
-  {"period": 1281222000000, "value": 78},
-  {"period": 1273446000000, "value": 45},
-  {"period": 1268524800000, "value": 54},
-  {"period": 1263081600000, "value": 45},
-  {"period": 1260403200000, "value": 23},
-  {"period": 1254870000000, "value": 76},
-  {"period": 1253833200000, "value": 100}
-];
+   
+    //var jsondata =  jQuery.parseJSON( {{cpudatas}} );
+    //alert({{cpudatas}});
+    var timestamp_data = {{cpudatas}};
 Morris.Line({
   element: 'cpu_total',
   data: timestamp_data,
-  xkey: 'period',
+  xkey: 'time',
   ykeys: ['value'],
   yLabelFormat: function(value) {
                   return value + '%'; 
@@ -415,6 +408,7 @@ Morris.Line({
 });
 });
   </script>
+  {% endautoescape %}
 <!-- ============ CPU Total Chart ============= -->
 
 <!-- ============== CPU LOAD ================== -->

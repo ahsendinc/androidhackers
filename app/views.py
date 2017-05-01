@@ -25,7 +25,7 @@ from rest_framework.renderers import JSONRenderer
 from .serializers import CPUTotalSerializer, CPUUserSerializer, CPUKernelSerializer, CPULoad1Serializer, CPULoad2Serializer,CPULoad3Serializer, CPUHog1Serializer, CPUHog2Serializer, CPUHog3Serializer, CPUHog4Serializer, CPUHog5Serializer, MemInfoTotalRamSerializer, MemInfoFreeRamSerializer, MemInfoUsedRamSerializer
 from .models import TestInfo
 from .serializers import TestInfoSerializer
-
+import datetime
 # Create your views here.
 #@ensure_csrf_cookie
 def index(request):
@@ -81,10 +81,24 @@ def indexcpu(request):
 		lastload2 = CPULoad2.objects.all()[CPULoad2.objects.count()-1].value
 		lastload3 = CPULoad3.objects.all()[CPULoad3.objects.count()-1].value
 
+		date_from = datetime.datetime.now() - datetime.timedelta(days=1)
+		cpudatas = CPUTotal.objects.filter(time__gte=date_from)
+		countcpu = CPUTotal.objects.filter(time__gte=date_from).count
 
-		daycpuquery = CPUTotal.objects.filter()
+		info = {}
+		content = []
+		for data in cpudatas:
+			info = {
+				"time" : data.time.timestamp(),
+				"value" : data.value
+			}
+			content.append(info)
+			
 
-		return render(request, 'cpu.html',{'lasthealth':lasthealth, 'laststatus':laststatus, 'lastlevel':lastlevel,'lasttemperature':lasttemperature/10,'lastcpu':lastcpu, 'lastram':lastramfree/1000, 'cpuhog1':lastcpuhog1, 'cpuhog2':lastcpuhog2, 'cpuhog3':lastcpuhog3, 'cpuhog4':lastcpuhog4, 'cpuhog5':lastcpuhog5, 'lastramfree':lastramfree, 'lastramused':lastramused, 'lastramtotal':lastramtotal, 'ramfree_percent':ramfree_percent, 'ramused_percent':ramused_percent, 'lastload1':lastload1, 'lastload2':lastload2, 'lastload3':lastload3})
+# created_documents = CreatedDocumentDetails.objects.filter(
+#      user=user, created_document_timestamp__gte=date_from).count()
+
+		return render(request, 'cpu.html',{'lasthealth':lasthealth, 'laststatus':laststatus, 'lastlevel':lastlevel,'lasttemperature':lasttemperature/10,'lastcpu':lastcpu, 'lastram':lastramfree/1000, 'cpuhog1':lastcpuhog1, 'cpuhog2':lastcpuhog2, 'cpuhog3':lastcpuhog3, 'cpuhog4':lastcpuhog4, 'cpuhog5':lastcpuhog5, 'lastramfree':lastramfree, 'lastramused':lastramused, 'lastramtotal':lastramtotal, 'ramfree_percent':ramfree_percent, 'ramused_percent':ramused_percent, 'lastload1':lastload1, 'lastload2':lastload2, 'lastload3':lastload3, 'cpudatas':content, 'countcpu':countcpu})
 	else:	
 	    return HttpResponse("Hello! You're at the Android Diagnosis index. Not allowed action.")
 
